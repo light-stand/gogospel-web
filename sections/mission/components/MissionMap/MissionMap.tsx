@@ -2,7 +2,7 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { mapSettings } from "./settings";
-import { Mission } from "../../domain/Mission";
+import { Mission } from "@/mission/domain/Mission";
 
 const center = {
   lat: -3.745,
