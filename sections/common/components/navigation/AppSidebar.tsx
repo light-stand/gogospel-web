@@ -31,7 +31,7 @@ import logo from "@/assets/logo.svg";
 const items = [
   {
     title: "Explore",
-    url: "/",
+    url: "/explore",
     icon: mdiCompassOutline,
     activeIcon: mdiCompass,
   },
