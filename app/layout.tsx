@@ -4,6 +4,7 @@ import { QueryClientProvider } from "react-query";
 import localFont from "next/font/local";
 import "./globals.css";
 import { queryClient } from "@/interface/queryClient";
+import Providers from "@/common/context/providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
