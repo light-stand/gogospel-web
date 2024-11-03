@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={`${nunito.className} antialiased`}>
         <Providers>
           <AppSidebar />
-          <main className="w-full">{children}</main>
+          <main className="w-full relative">{children}</main>
         </Providers>
       </body>
     </html>
