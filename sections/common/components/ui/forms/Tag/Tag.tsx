@@ -1,14 +1,14 @@
 import React from "react";
 import clsx from "clsx";
 import colors from "tailwindcss/colors";
+import { Icon, MaterialIconType } from "../../foundation";
 
 export interface TagProps {
   label: string;
   selected?: boolean;
   onClick?: () => void;
   compact?: boolean;
-  // icon?: MaterialIconType;
-  icon?: string;
+  icon?: MaterialIconType;
   color?: keyof typeof colors;
   className?: string;
   style?: object[];
@@ -35,22 +35,20 @@ const Tag: React.FC<TagProps> = ({ label, selected, onClick, compact, color, ico
       }
     >
       {icon && (
-        <></>
-        // <Icon
-        //   name={icon}
-        //   className={clsx(
-        //     "mr-1",
-        //     selected ? "text-neutral-700" : "text-neutral-400",
-        //     compact ? "text-xs" : "text-sm"
-        //   )}
-        //   style={[
-        //     {
-        //       ...(color && {
-        //         color: colors[selected ? color : "neutral"][selected ? 600 : 500],
-        //       }),
-        //     },
-        //   ]}
-        // />
+        <Icon
+          name={icon}
+          className={clsx(
+            "mr-1",
+            selected ? "text-neutral-700" : "text-neutral-400",
+            compact ? "text-xs" : "text-sm"
+          )}
+          size={compact ? 0.6 : 1}
+          style={{
+            ...(color && {
+              color: colors[selected ? color : "neutral"][selected ? 600 : 500],
+            }),
+          }}
+        />
       )}
       <span
         className={clsx(
