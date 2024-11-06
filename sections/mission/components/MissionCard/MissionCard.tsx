@@ -22,6 +22,7 @@ import clsx from "clsx";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { TagCloud } from "@/common/components/ui/forms/TagCloud";
+import { Icon } from "@/common/components/ui";
 
 export interface MissionCardProps {
   mission: Mission;
@@ -62,43 +63,44 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
   return (
     <div
       className={clsx(
-        "flex border-b border-neutral-200 p-4 justify-between w-full gap-x-2 min-w-80",
-        "bg-white shadow-md",
+        "w-[16rem] relative h-[16rem]",
+        "flex justify-between gap-x-2",
+        "bg-white shadow-md rounded-lg overflow-hidden",
         className
       )}
       onClick={onCardPress}
     >
-      <div className="aspect-square rounded-2xl overflow-hidden my-auto">
+      <div className="absolute aspect-square rounded-2xl">
         <Image
           src={(images ? images[0] : user_profile?.images[0]) || ""}
-          className="flex-1 object-cover"
+          className="flex-1 object-cover w-full h-full"
           alt="Mission"
-          width={108}
-          height={108}
+          height={200}
+          width={200}
           objectFit="cover"
           objectPosition="center"
         />
       </div>
-      <div className="flex flex-col flex-1 items-start justify-between">
+      <div className="absolute bottom-0 p-2 flex flex-col justify-end z-10 w-full bg-white flex-0">
         <span className="text-lg font-bold line-clamp-1">{title}</span>
         <div className="flex flex-col w-full">
           <div className="flex flex-row items-center">
-            {/* <Icon name="church" className="mr-2 text-neutral-500 text-base" /> */}
-            <span className="text-neutral-500 font-bold w-full line-clamp-1 text-md">
+            <Icon name="church" className="mr-2 text-neutral-500 text-base" size={0.6} />
+            <span className="text-neutral-500 font-bold w-full line-clamp-1 text-sm">
               {user_profile?.name}
             </span>
           </div>
 
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center gap-x-1">
             {duration && (
               <>
-                {/* <Icon name="clock" className="mr-1 text-neutral-500 text-base" /> */}
-                <span className="text-md text-neutral-500 font-bold">
+                <Icon name="clock" className="text-neutral-500 text-base" size={0.6} />
+                <span className="text-sm text-neutral-500 font-bold line-clamp-1">
                   {capitalize(dayjs.duration(duration, "days").humanize())}
                 </span>
               </>
             )}
-            {/* <Icon name="map-marker" className="mx-1 text-neutral-500 text-base" /> */}
+            <Icon name="map-marker" className="text-neutral-500 text-base" size={0.6} />
             <span className="text-sm text-neutral-500 font-bold">
               {t("maps.distance", { distance })}
             </span>
@@ -115,7 +117,8 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
         <TagCloud
           compact
           allSelected
-          className="h-10 w-full overflow-y-hidden overflow-x-scroll max-w-60 no-scrollbar"
+          noWrap
+          className="w-full h-5 overflow-y-hidden overflow-x-scroll no-scrollbar"
           options={categories.map((category) => ({
             label: t(`mission.types.${category}`),
             value: category,

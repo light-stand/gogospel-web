@@ -18,7 +18,13 @@ const MissionList: React.FC<MissionListProps> = ({
   ...props
 }) => {
   return (
-    <div className={clsx("flex overflow-scroll max-h-screen no-scrollbar", className)}>
+    <div
+      className={clsx(
+        "grid grid-cols-2 gap-2 pb-8 px-4",
+        "overflow-y-overlay overflow-x-hidden",
+        className
+      )}
+    >
       {isLoading ? (
         <div className="loading">Loading...</div>
       ) : missions.length === 0 && NoResultsComponent ? (

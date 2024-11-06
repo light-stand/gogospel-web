@@ -41,6 +41,9 @@ import {
   mdiSoccer,
   mdiTelevision,
   mdiVideo,
+  mdiChurch,
+  mdiClock,
+  mdiMapMarker,
 } from "@mdi/js";
 
 const icons = {
@@ -85,6 +88,9 @@ const icons = {
   soccer: mdiSoccer,
   television: mdiTelevision,
   video: mdiVideo,
+  church: mdiChurch,
+  clock: mdiClock,
+  "map-marker": mdiMapMarker,
 };
 
 export type MaterialIconType = keyof typeof icons;

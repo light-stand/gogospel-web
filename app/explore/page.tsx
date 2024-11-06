@@ -8,15 +8,19 @@ export default function Explore() {
   const { missions } = useExploreMissions();
   if (!missions) return null;
   return (
-    <>
-      <MissionList
-        missions={missions}
-        className={clsx(
-          "absolute left-0 z-10 w-full flex-row gap-x-2 bottom-4",
-          "md:bottom-0 md:items-end md:flex-col md:gap-x-0 md:w-96"
-        )}
-      />
-      <MissionMap missions={missions} />
-    </>
+    <div className="flex flex-row">
+      <div className="bg-neutral-100 shadow-xl z-10 h-screen flex flex-col">
+        <div className="flex flex-col p-4 pb-8 gap-y-2">
+          <h1 className="text-3xl font-bold">Explore</h1>
+          <p className="text-gray-600">
+            Explore missions around the world. Click on a mission to learn more.
+          </p>
+        </div>
+        <MissionList missions={missions} />
+      </div>
+      <div className="flex-1">
+        <MissionMap missions={missions} />
+      </div>
+    </div>
   );
 }
