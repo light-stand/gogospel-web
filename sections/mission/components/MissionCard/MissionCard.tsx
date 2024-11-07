@@ -1,28 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { capitalize } from "lodash";
-
-import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-import duration from "dayjs/plugin/duration";
-import relativeTime from "dayjs/plugin/relativeTime";
-
-import "dayjs/locale/es";
-
-dayjs.extend(localizedFormat);
-dayjs.extend(duration);
-dayjs.extend(relativeTime);
-
-// import { Icon, Image, TagCloud } from "@/components";
-import { Mission } from "@/mission/domain/Mission";
-import { missionTypes } from "@/mission/domain/MissionType";
-// import { useTranslation } from "react-i18next";
-// import { getLocation } from "@/maps/utils/location";
-import { haversineDistance } from "@/maps/utils/distance";
+import { useTranslations } from "next-intl";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { TagCloud } from "@/common/components/ui/forms/TagCloud";
-import { Icon } from "@/common/components/ui";
+import dayjs from "dayjs";
+
+import { Icon, TagCloud } from "@/components/ui";
+import { Mission } from "@/mission/domain/Mission";
+import { missionTypes } from "@/mission/domain/MissionType";
+// import { getLocation } from "@/maps/utils/location";
 
 export interface MissionCardProps {
   mission: Mission;
@@ -31,8 +18,7 @@ export interface MissionCardProps {
 }
 
 const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
-  // const { t } = useTranslation();
-  const t = (key: string, a?: any) => key;
+  const t = useTranslations();
 
   const [distance, setDistance] = React.useState<number | null>(null);
 
@@ -102,7 +88,8 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
             )}
             <Icon name="map-marker" className="text-neutral-500 text-base" size={0.6} />
             <span className="text-sm text-neutral-500 font-bold">
-              {t("maps.distance", { distance })}
+              {/* {t("maps.distance", { distance })} */}
+              0km
             </span>
           </div>
           {/* {start_date && end_date && (
@@ -117,10 +104,10 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
         <TagCloud
           compact
           allSelected
-          noWrap
-          className="w-full h-5 overflow-y-hidden overflow-x-scroll no-scrollbar"
+          // noWrap
+          className="w-full h-11 overflow-y-hidden overflow-x-scroll no-scrollbar"
           options={categories.map((category) => ({
-            label: t(`mission.types.${category}`),
+            label: t(`mission.type.${category}`),
             value: category,
             color: missionTypes[category].color,
             icon: missionTypes[category].icon,

@@ -1,13 +1,9 @@
 "use client";
 import React from "react";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { mapSettings } from "./settings";
 import { Mission } from "@/mission/domain/Mission";
-
-const center = {
-  lat: -3.745,
-  lng: -38.523,
-};
+import { Marker } from "./partials/Marker";
 
 export const MissionMap = ({ missions }: { missions: Mission[] }) => {
   const { isLoaded } = useJsApiLoader({
@@ -18,10 +14,6 @@ export const MissionMap = ({ missions }: { missions: Mission[] }) => {
   const [map, setMap] = React.useState(null);
 
   const onLoad = React.useCallback((map: any) => {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
     setMap(map);
   }, []);
 
@@ -38,14 +30,13 @@ export const MissionMap = ({ missions }: { missions: Mission[] }) => {
         streetView: null,
       }}
       mapContainerStyle={{ height: "100vh", width: "100%" }}
-      center={center}
-      zoom={10}
+      center={{ lat: 0, lng: 0 }}
+      zoom={3}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      {/* Child components, such as markers, info windows, etc. */}
       {missions.map((mission) => (
-        <Marker key={mission.id} position={{ lat: mission.lat, lng: mission.long }} />
+        <Marker mission={mission} />
       ))}
     </GoogleMap>
   ) : (
