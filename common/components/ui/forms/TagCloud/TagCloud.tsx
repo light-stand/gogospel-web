@@ -1,14 +1,15 @@
 import React from "react";
 import clsx from "clsx";
 import colors from "tailwindcss/colors";
-import Tag from "../Tag/Tag";
 import { Control, useController } from "react-hook-form";
+
+import Tag from "../Tag/Tag";
+import { MaterialIconType } from "../../foundation";
 
 type Option = {
   label: string;
   value: string;
-  icon?: string;
-  // icon?: MaterialIconType;
+  icon?: MaterialIconType;
   color?: keyof typeof colors;
 };
 
@@ -76,7 +77,7 @@ const TagCloud: React.FC<TagCloudProps> = ({
             compact={compact}
             icon={item.icon}
             color={item.color}
-            className={clsx(compact ? "m-[1px]" : "m-1")}
+            className={clsx(compact ? "m-[2px]" : "m-1")}
           />
         ))}
       </div>

@@ -46,7 +46,7 @@ import {
   mdiMapMarker,
 } from "@mdi/js";
 
-const icons = {
+export const icons = {
   account: mdiAccount,
   "account-outline": mdiAccountOutline,
   chat: mdiChat,

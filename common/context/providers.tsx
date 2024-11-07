@@ -1,7 +1,9 @@
 "use client";
 import { QueryClientProvider } from "react-query";
+
 import { queryClient } from "@/interface/queryClient";
 import { SidebarProvider } from "../components/ui/sidebar";
+import "@/utils/date.ts";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (

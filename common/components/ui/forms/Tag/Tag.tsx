@@ -21,9 +21,9 @@ const Tag: React.FC<TagProps> = ({ label, selected, onClick, compact, color, ico
       className={clsx(
         className,
         selected && !color ? "border-neutral-400 bg-neutral-200" : "border-neutral-500",
-        "flex flex-row rounded-lg items-center",
+        "flex flex-row items-center flex-shrink-0",
         "self-start",
-        compact ? "px-1 py-[1px]" : "py-1 px-2"
+        compact ? "px-1 py-[1px] rounded-md" : "py-1 px-2 rounded-lg"
       )}
       style={
         color
