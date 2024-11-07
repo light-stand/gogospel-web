@@ -1,11 +1,14 @@
 "use client";
+import { useTranslations } from "next-intl";
+
 import { useExploreMissions } from "@/shared/mission/application/useExploreMissions";
 import { MissionMap } from "@/mission/components/MissionMap";
 import { MissionList } from "@/mission/components/MissionList";
-import clsx from "clsx";
 
 export default function Explore() {
   const { missions } = useExploreMissions();
+  const t = useTranslations();
+
   if (!missions) return null;
   return (
     <div className="flex flex-row">
