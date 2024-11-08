@@ -1,5 +1,7 @@
+"use client";
 import { Marker as GMarker } from "@react-google-maps/api";
 import colors from "tailwindcss/colors";
+import { useRouter } from "next/navigation";
 
 import { Mission } from "@/mission/domain/Mission";
 import { missionTypes } from "@/mission/domain/MissionType";
@@ -15,11 +17,16 @@ export const Marker = ({
   mission: Mission;
   onPress?: (id: string) => void;
 }) => {
+  const router = useRouter();
+  const onClick = () => {
+    console.log(mission.id);
+    router.push(`/mission/${mission.id}`);
+  };
   // const key = marker.properties.id || marker.geometry.coordinates[0];
   return (
     <GMarker
       clickable
-      onClick={() => console.log(mission.id)}
+      onClick={onClick}
       shape={{
         type: "circle",
         coords: [0, 0, 24],

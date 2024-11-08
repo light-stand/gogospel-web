@@ -44,6 +44,13 @@ import {
   mdiChurch,
   mdiClock,
   mdiMapMarker,
+  mdiChevronLeft,
+  mdiCalendar,
+  mdiMapMarkerDistance,
+  mdiClockTimeEightOutline,
+  mdiCurrencyUsd,
+  mdiHeart,
+  mdiHeartOutline,
 } from "@mdi/js";
 
 export const icons = {
@@ -91,12 +98,20 @@ export const icons = {
   church: mdiChurch,
   clock: mdiClock,
   "map-marker": mdiMapMarker,
+  "chevron-left": mdiChevronLeft,
+  calendar: mdiCalendar,
+  "map-marker-distance": mdiMapMarkerDistance,
+  "clock-time-eight-outline": mdiClockTimeEightOutline,
+  "currency-usd": mdiCurrencyUsd,
+  heart: mdiHeart,
+  "heart-outline": mdiHeartOutline,
 };
 
-export type MaterialIconType = keyof typeof icons;
+export type MaterialIconType = keyof typeof icons | null;
 
 interface IconProps extends Omit<React.ComponentProps<typeof MdiIcon>, "path"> {
   name: MaterialIconType;
 }
 
-export const Icon = ({ name, ...props }: IconProps) => <MdiIcon {...props} path={icons[name]} />;
+export const Icon = ({ name, ...props }: IconProps) =>
+  name && <MdiIcon {...props} path={icons[name]} />;

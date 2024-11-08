@@ -1,4 +1,6 @@
 import clsx from "clsx";
+import Link from "next/link";
+
 import MissionCard from "../MissionCard/MissionCard";
 import { Mission } from "@/mission/domain/Mission";
 
@@ -30,7 +32,11 @@ const MissionList: React.FC<MissionListProps> = ({
       ) : missions.length === 0 && NoResultsComponent ? (
         <NoResultsComponent />
       ) : (
-        missions.map((mission) => <MissionCard mission={mission} key={mission.id} />)
+        missions.map((mission) => (
+          <Link href={`/mission/${mission.id}`} className="hover:opacity-80">
+            <MissionCard mission={mission} key={mission.id} />
+          </Link>
+        ))
       )}
     </div>
   );

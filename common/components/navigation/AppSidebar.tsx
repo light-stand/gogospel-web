@@ -58,7 +58,7 @@ const items = [
 export function AppSidebar() {
   const pathname = usePathname();
   return (
-    <Sidebar>
+    <Sidebar className="z-20">
       <SidebarContent>
         <SidebarHeader>
           <Image src={logo} alt="Logo" className="w-10 h-10 mx-auto mt-2" />
