@@ -1,14 +1,13 @@
 import { useEffect } from "react";
-import { supabase } from "@/common/interface/supabase";
 import { useAuthStore } from "@/auth/store/useAuthStore";
+import { ApiConnection } from "@/interface/api";
 
-export const useAuthInit = () => {
+export const useAuthInit = ({ client }: ApiConnection) => {
   const { setSession } = useAuthStore();
 
   useEffect(() => {
-    supabase.auth
-      .getSession()
-      .then(({ data: { session } }) => setSession(session));
-    supabase.auth.onAuthStateChange((_event, session) => setSession(session));
-  }, [setSession]);
+    if (!client) return;
+    client.auth.getSession().then(({ data: { session } }) => setSession(session));
+    client.auth.onAuthStateChange((_event, session) => setSession(session));
+  }, [setSession, client]);
 };

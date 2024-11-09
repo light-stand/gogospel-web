@@ -28,12 +28,8 @@ export function AppSidebar() {
   const router = useRouter();
   const { session } = useAuthStore();
 
-  const onOptionClick = async (
-    url: (typeof navigationOptions)[number]["url"],
-  ) => {
-    return session?.user || url === "/explore"
-      ? router.push(url)
-      : setOpenModal("auth");
+  const onOptionClick = async (url: (typeof navigationOptions)[number]["url"]) => {
+    return session?.user || url === "/explore" ? router.push(url) : setOpenModal("auth");
   };
 
   return (
@@ -50,21 +46,16 @@ export function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild className="flex-col h-14">
-                      <button
-                        onClick={() => onOptionClick(item.url)}
-                        className="gap-y-1"
-                      >
+                      <button onClick={() => onOptionClick(item.url)} className="gap-y-1">
                         <Icon
                           name={isActive ? item.activeIcon : item.icon}
                           size={0.85}
-                          className={clsx(
-                            isActive ? "text-indigo-500" : "text-neutral-500",
-                          )}
+                          className={clsx(isActive ? "text-indigo-500" : "text-neutral-500")}
                         />
                         <span
                           className={clsx(
                             isActive ? "text-indigo-500" : "text-neutral-500",
-                            "text-xs font-bold",
+                            "text-xs font-bold"
                           )}
                         >
                           {t(item.title)}
