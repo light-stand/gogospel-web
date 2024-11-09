@@ -2,14 +2,16 @@ import React from "react";
 import { capitalize } from "lodash";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
-import { redirect } from "next/navigation";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+
 import Image from "next/image";
-import dayjs from "dayjs";
+import dayjs from "@/utils/date";
 
 import { Icon, TagCloud } from "@/components/ui";
+
 import { Mission } from "@/mission/domain/Mission";
 import { missionTypes } from "@/mission/domain/MissionType";
-// import { getLocation } from "@/maps/utils/location";
 
 export interface MissionCardProps {
   mission: Mission;
@@ -20,11 +22,9 @@ export interface MissionCardProps {
 const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
   const t = useTranslations();
 
-  const [distance, setDistance] = React.useState<number | null>(null);
-
-  const onCardPress = () => {
-    redirect(`/mission/${mission.id}`);
-  };
+  // const onCardPress = () => {
+  //   redirect(`/mission/${mission.id}`);
+  // };
 
   // const getMissionDistance = async () => {
   //   const userLocation = await getLocation();
@@ -54,7 +54,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
         "bg-white shadow-md rounded-lg overflow-hidden",
         className
       )}
-      onClick={onCardPress}
+      // onClick={onCardPress}
     >
       <div className="absolute aspect-square rounded-2xl">
         <Image
@@ -63,8 +63,6 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
           alt="Mission"
           height={200}
           width={200}
-          objectFit="cover"
-          objectPosition="center"
         />
       </div>
       <div className="absolute bottom-0 p-2 flex flex-col justify-end z-10 w-full bg-white flex-0">

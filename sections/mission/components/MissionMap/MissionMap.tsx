@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 
 import { useExploreMissions } from "@/mission/application/useExploreMissions";
@@ -7,7 +7,7 @@ import { mapSettings } from "./settings";
 import { Marker } from "./partials/Marker";
 
 export const MissionMap = () => {
-  const { missions } = useExploreMissions();
+  const { missions, refetch } = useExploreMissions();
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyCcY7g-HEkrTVHkuj5MvNDRPQNGeQF8CzA",
@@ -17,13 +17,18 @@ export const MissionMap = () => {
 
   const onLoad = React.useCallback((map: any) => {
     setMap(map);
+    refetch();
   }, []);
 
   const onUnmount = React.useCallback((map: any) => {
     setMap(null);
   }, []);
 
-  return isLoaded && missions ? (
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  return isLoaded ? (
     <GoogleMap
       options={{
         styles: mapSettings.customMapStyle,
@@ -37,9 +42,7 @@ export const MissionMap = () => {
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      {missions.map((mission) => (
-        <Marker mission={mission} key={mission.id} />
-      ))}
+      {missions && missions.map((mission) => <Marker mission={mission} key={mission.id} />)}
     </GoogleMap>
   ) : (
     <></>

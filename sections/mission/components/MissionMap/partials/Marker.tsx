@@ -19,7 +19,6 @@ export const Marker = ({
 }) => {
   const router = useRouter();
   const onClick = () => {
-    console.log(mission.id);
     router.push(`/mission/${mission.id}`);
   };
   // const key = marker.properties.id || marker.geometry.coordinates[0];

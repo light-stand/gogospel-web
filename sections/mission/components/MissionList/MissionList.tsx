@@ -14,7 +14,6 @@ interface MissionListProps {
 
 const MissionList: React.FC<MissionListProps> = ({
   missions,
-  isLoading,
   NoResultsComponent,
   className,
   ...props
@@ -27,14 +26,12 @@ const MissionList: React.FC<MissionListProps> = ({
         className
       )}
     >
-      {isLoading ? (
-        <div className="loading">Loading...</div>
-      ) : missions.length === 0 && NoResultsComponent ? (
+      {missions.length === 0 && NoResultsComponent ? (
         <NoResultsComponent />
       ) : (
         missions.map((mission) => (
-          <Link href={`/mission/${mission.id}`} className="hover:opacity-80">
-            <MissionCard mission={mission} key={mission.id} />
+          <Link href={`/mission/${mission.id}`} className="hover:opacity-80" key={mission.id}>
+            <MissionCard mission={mission} />
           </Link>
         ))
       )}

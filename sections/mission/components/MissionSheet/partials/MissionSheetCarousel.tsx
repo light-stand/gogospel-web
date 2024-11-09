@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -16,8 +17,8 @@ export const MissionSheetCarousel = ({ mission }: MissionSheetCarouselProps) => 
         <div className="h-full" ref={ref}>
           <div className="h-full">
             {mission?.images?.map((url) => (
-              <div className="" key={url}>
-                <Image src={url} alt={mission?.title} className="h-full" fill objectFit="cover" />
+              <div className="relative h-full w-full" key={url}>
+                <Image src={url} alt={mission?.title} className="h-full object-cover w-full" fill />
               </div>
             ))}
           </div>

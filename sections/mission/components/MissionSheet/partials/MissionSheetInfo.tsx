@@ -1,5 +1,5 @@
 import { capitalize } from "lodash";
-import dayjs from "dayjs";
+import dayjs from "@/utils/date";
 import { useTranslations } from "next-intl";
 
 import { Icon, TagCloud, MaterialIconType } from "@/components/ui";
@@ -20,9 +20,7 @@ export const MissionSheetInfo = ({ mission }: MissionSheetInfoProps) => {
     },
     mission?.duration && {
       icon: "clock-time-eight-outline",
-      text: capitalize(
-        dayjs.duration(mission?.duration as number, "days").humanize(),
-      ),
+      text: capitalize(dayjs.duration(mission?.duration as number, "days").humanize()),
     },
     { icon: "map-marker", text: mission?.location_name },
     mission?.distance && {
@@ -46,15 +44,8 @@ export const MissionSheetInfo = ({ mission }: MissionSheetInfoProps) => {
 
       <div className="flex flex-row flex-wrap items-center gap-y-2">
         {info.map((item) => (
-          <div
-            key={item.icon}
-            className="flex w-1/2 flex-row items-center px-1"
-          >
-            <Icon
-              name={item.icon}
-              className="text-lg text-neutral-500 mr-1"
-              size={0.8}
-            />
+          <div key={item.icon} className="flex w-1/2 flex-row items-center px-1">
+            <Icon name={item.icon} className="text-lg text-neutral-500 mr-1" size={0.8} />
             <span className="flex-1 text-base font-semibold text-neutral-500 line-clamp-1">
               {item.text}
             </span>
@@ -62,9 +53,7 @@ export const MissionSheetInfo = ({ mission }: MissionSheetInfoProps) => {
         ))}
       </div>
 
-      <p className="text-base text-neutral-400 my-4 w-full break-words">
-        {mission?.description}
-      </p>
+      <p className="text-base text-neutral-400 my-4 w-full break-words">{mission?.description}</p>
     </>
   );
 };
