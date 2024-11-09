@@ -51,6 +51,7 @@ import {
   mdiCurrencyUsd,
   mdiHeart,
   mdiHeartOutline,
+  mdiCheck,
 } from "@mdi/js";
 
 export const icons = {
@@ -105,6 +106,7 @@ export const icons = {
   "currency-usd": mdiCurrencyUsd,
   heart: mdiHeart,
   "heart-outline": mdiHeartOutline,
+  check: mdiCheck,
 };
 
 export type MaterialIconType = keyof typeof icons | null;
