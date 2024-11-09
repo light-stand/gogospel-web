@@ -1,7 +1,7 @@
 "use client";
+import { signupSchema, SignupFields } from "@/auth/domain/Signup";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -12,19 +12,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { LoginFields, loginSchema } from "@/auth/domain/Login";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { signup } from "@/app/auth/actions";
 
-import { login } from "@/app/auth/actions";
-
-export const LoginForm = () => {
+export const SignupForm = () => {
   const t = useTranslations();
-  const form = useForm<LoginFields>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<SignupFields>({
+    resolver: zodResolver(signupSchema),
   });
 
-  const submit = form.handleSubmit(login);
+  const submit = form.handleSubmit(signup);
 
   return (
     <Form {...form}>
@@ -55,10 +53,24 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Link href="/auth/signup" className="self-center">
-          {t("auth.messages.dontHaveAccount")}
-        </Link>
-        <Button className="mt-4 px-12 self-center" type="submit" formAction={submit}>
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("auth.fields.confirmPassword")}</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button
+          className="mt-4 px-12 self-center"
+          type="submit"
+          formAction={submit}
+        >
           {t("action.next")}
         </Button>
       </form>
