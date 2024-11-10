@@ -52,6 +52,15 @@ import {
   mdiHeart,
   mdiHeartOutline,
   mdiCheck,
+  mdiDomain,
+  mdiCharity,
+  mdiRadio,
+  mdiAccountMultiple,
+  mdiBookOpen,
+  mdiMusicNote,
+  mdiStorefront,
+  mdiLibrary,
+  mdiCross,
 } from "@mdi/js";
 
 export const icons = {
@@ -107,6 +116,15 @@ export const icons = {
   heart: mdiHeart,
   "heart-outline": mdiHeartOutline,
   check: mdiCheck,
+  domain: mdiDomain,
+  charity: mdiCharity,
+  radio: mdiRadio,
+  "account-multiple": mdiAccountMultiple,
+  "book-open": mdiBookOpen,
+  "music-note": mdiMusicNote,
+  storefront: mdiStorefront,
+  library: mdiLibrary,
+  cross: mdiCross,
 };
 
 export type MaterialIconType = keyof typeof icons | null;

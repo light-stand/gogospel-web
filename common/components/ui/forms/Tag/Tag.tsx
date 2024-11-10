@@ -20,10 +20,12 @@ const Tag: React.FC<TagProps> = ({ label, selected, onClick, compact, color, ico
       onClick={onClick && onClick}
       className={clsx(
         className,
+        "cursor-pointer select-none",
         selected && !color ? "border-neutral-400 bg-neutral-200" : "border-neutral-500",
         "flex flex-row items-center flex-shrink-0",
         "self-start",
-        compact ? "px-1 py-[1px] rounded-md" : "py-[2px] px-[6px] rounded-lg"
+        compact ? "px-1 py-[1px] rounded-md" : "py-[2px] px-[6px] rounded-lg",
+        color && `hover:opacity-80 duration-75`
       )}
       style={
         color

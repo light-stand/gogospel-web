@@ -64,7 +64,7 @@ const TagCloud: React.FC<TagCloudProps> = ({
   return (
     <div {...props}>
       {(!!error || label) && (
-        <span className={clsx("text-xs text-gray-500 mb-2 font-medium", error && "text-red-500")}>
+        <span className={clsx("text-sm text-gray-500 mb-2 font-medium", error && "text-red-500")}>
           {error || label}
         </span>
       )}
