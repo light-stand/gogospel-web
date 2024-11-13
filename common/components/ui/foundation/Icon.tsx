@@ -61,6 +61,12 @@ import {
   mdiStorefront,
   mdiLibrary,
   mdiCross,
+  mdiCheckDecagram,
+  mdiChevronRight,
+  mdiCommentCheckOutline,
+  mdiLockCheckOutline,
+  mdiLogout,
+  mdiBell,
 } from "@mdi/js";
 
 export const icons = {
@@ -125,6 +131,12 @@ export const icons = {
   storefront: mdiStorefront,
   library: mdiLibrary,
   cross: mdiCross,
+  "check-decagram": mdiCheckDecagram,
+  "chevron-right": mdiChevronRight,
+  "comment-check-outline": mdiCommentCheckOutline,
+  bell: mdiBell,
+  logout: mdiLogout,
+  "lock-check-outline": mdiLockCheckOutline,
 };
 
 export type MaterialIconType = keyof typeof icons | null;

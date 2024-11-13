@@ -11,7 +11,7 @@ export async function login(data: LoginFields) {
   const { client } = await createSSRClient();
 
   const { error } = await client.auth.signInWithPassword(data);
-  if (error) throw new Error("Invalid credentials");
+  if (error) throw { message: "Invalid credentials" };
 
   revalidatePath("/");
   redirect("/");
@@ -22,18 +22,23 @@ export async function signup(data: SignupFields) {
   const { client } = await createSSRClient();
 
   const { error } = await client.auth.signUp(data);
-  if (error) throw new Error("Invalid credentials");
+  if (error) throw { message: "Invalid credentials" };
 
   revalidatePath("/");
   redirect("/");
 }
 
 export async function signOut() {
-  const { client } = await createSSRClient();
+  try {
+    const { client } = await createSSRClient();
 
-  const { error } = await client.auth.signOut();
-  if (error) throw new Error("Error Signing out");
+    const { error } = await client.auth.signOut();
+    console.log(">>>>>>>>><error", error);
+    if (error) throw { message: "Failed to sign out" };
 
-  revalidatePath("/");
-  redirect("/");
+    revalidatePath("/");
+    redirect("/");
+  } catch (e) {
+    return { message: "Failed to sign out" };
+  }
 }
