@@ -1,10 +1,10 @@
+import { UserProfileRepository } from "@/user/interface/userProfileRepository";
 import { createServerClient } from "@supabase/ssr";
+
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request,
-  });
+  let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SB_API_REST_URL!,
@@ -15,18 +15,16 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set(name, value),
-          );
+          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
           supabaseResponse = NextResponse.next({
             request,
           });
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options),
+            supabaseResponse.cookies.set(name, value, options)
           );
         },
       },
-    },
+    }
   );
 
   // IMPORTANT: Avoid writing any logic between createServerClient and
@@ -37,13 +35,28 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const userRepo = new UserProfileRepository(supabase);
+  const [userProfile] = user ? await userRepo.get(["user_id", "eq", user?.id]) : [null];
+
+  // Incomplete profile: Redirect to profile completion
+  if (user && !userProfile && !request.nextUrl.pathname.startsWith("/onboarding/profiling")) {
+    console.log(">>> Incomplete profile: Redirect to profile completion");
+    const url = request.nextUrl.clone();
+    url.pathname = "/onboarding/profiling";
+    return NextResponse.redirect(url);
+  }
+
+  // User exists, don't let it log again
   if (user && request.nextUrl.pathname.startsWith("/auth")) {
     // no user, potentially respond by redirecting the user to the login page
+    console.log(">>> User exists, don't let it log again");
+
     const url = request.nextUrl.clone();
     url.pathname = "/";
     return NextResponse.redirect(url);
   }
 
+  // Anonymous user trying to access private screens
   if (
     !user &&
     !request.nextUrl.pathname.startsWith("/auth") &&
@@ -51,6 +64,7 @@ export async function updateSession(request: NextRequest) {
     !request.nextUrl.pathname.startsWith("/mission")
   ) {
     // no user, potentially respond by redirecting the user to the login page
+    console.log(">>> Anonymous user trying to access private screens");
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
     return NextResponse.redirect(url);
