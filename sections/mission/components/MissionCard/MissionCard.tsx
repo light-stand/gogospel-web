@@ -105,7 +105,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
           // noWrap
           className="w-full h-11 overflow-y-hidden overflow-x-scroll no-scrollbar"
           options={categories.map((category) => ({
-            label: t(`mission.type.${category}`),
+            label: t(`mission.types.${category}`),
             value: category,
             color: missionTypes[category].color,
             icon: missionTypes[category].icon,

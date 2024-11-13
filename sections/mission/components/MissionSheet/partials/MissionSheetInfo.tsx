@@ -35,7 +35,7 @@ export const MissionSheetInfo = ({ mission }: MissionSheetInfoProps) => {
         className="w-full my-2"
         allSelected
         options={(mission?.categories || []).map((category) => ({
-          label: t(`mission.type.${category}`),
+          label: t(`mission.types.${category}`),
           value: category,
           color: missionTypes[category].color,
           icon: missionTypes[category].icon,

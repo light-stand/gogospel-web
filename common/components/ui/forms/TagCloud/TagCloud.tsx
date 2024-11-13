@@ -26,6 +26,7 @@ export interface TagCloudProps {
   name?: string;
   control?: Control<any, any>;
   className?: string;
+  innerClassName?: string;
 }
 
 const TagCloud: React.FC<TagCloudProps> = ({
@@ -38,6 +39,7 @@ const TagCloud: React.FC<TagCloudProps> = ({
   noWrap,
   max,
   name = "",
+  innerClassName,
   control,
   ...props
 }) => {
@@ -68,7 +70,13 @@ const TagCloud: React.FC<TagCloudProps> = ({
           {error || label}
         </span>
       )}
-      <div className={clsx("flex flex-1 flex-row flex-wrap w-full", noWrap && "flex-nowrap")}>
+      <div
+        className={clsx(
+          "flex flex-1 flex-row flex-wrap w-full",
+          noWrap && "flex-nowrap",
+          innerClassName
+        )}
+      >
         {options.map((item: Option, index: number) => (
           <Tag
             key={index}
