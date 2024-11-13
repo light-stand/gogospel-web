@@ -16,7 +16,7 @@ export default function Onboarding() {
   const t = useTranslations();
   const [step, setStep] = useState<Step>(Step.Welcome);
   const router = useRouter();
-  const { form, onSubmit } = useProfiling(router);
+  const { form, onSubmit } = useProfiling({ onSuccess: () => router.push("/") });
 
   const goPrev = async () => {
     if (step === Step.Welcome) return await signOut();
