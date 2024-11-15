@@ -12,7 +12,7 @@ export default async function Explore() {
   });
 
   return (
-    <div className="shadow-2xl z-10 h-screen flex flex-col">
+    <div className="shadow-2xl z-10 h-screen flex flex-col w-[36rem]">
       <div className="flex flex-col p-4 gap-y-2">
         <h1 className="text-2xl font-bold">Explore</h1>
         <p className="text-gray-600">
