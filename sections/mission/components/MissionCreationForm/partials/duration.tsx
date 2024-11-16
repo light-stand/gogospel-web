@@ -21,7 +21,8 @@ export const DurationSection = ({ form }: { form: UseFormReturn<MissionCreationF
   form.watch(["noDuration", "noStartDate", "startDate"]);
 
   return (
-    <div className="flex-1 space-y-2">
+    <div className="flex-1 space-y-2 max-w-[400px]">
+      <h2 className="text-neutral-700 font-bold text-xl">{t("titles.duration")}</h2>
       <FormField
         control={form.control}
         name="startDate"

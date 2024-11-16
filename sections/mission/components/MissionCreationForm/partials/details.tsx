@@ -12,6 +12,7 @@ export const DetailsSection = ({ form }: { form: UseFormReturn<MissionCreationFi
 
   return (
     <div className="flex-[2] flex flex-col space-y-2">
+      <h2 className="text-neutral-700 font-bold text-xl">{t("titles.title")}</h2>
       <FormField
         control={form.control}
         name="title"

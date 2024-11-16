@@ -22,14 +22,14 @@ export const CategorySection = ({ form }: { form: UseFormReturn<MissionCreationF
   );
 
   return (
-    <div className="flex-1">
-      <span>{t(`creation.helper.categories`)}</span>
+    <div className="flex-1 flex flex-col space-y-2">
+      <h2 className="text-neutral-700 font-bold text-xl">{t("creation.titles.categories")}</h2>
+      <span className="font-bold text-neutral-500">{t(`creation.helper.categories`)}</span>
       <FormField
         control={form.control}
         name="categories"
         render={({ field }) => (
           <TagCloud
-            label={t(`creation.titles.categories`)}
             innerClassName="max-h-[24rem] overflow-y-scroll md:overflow-hidden md:max-h-none"
             name="interests"
             max={10}
