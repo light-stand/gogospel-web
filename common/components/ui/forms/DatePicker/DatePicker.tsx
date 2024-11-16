@@ -3,7 +3,6 @@ import React from "react";
 import clsx from "clsx";
 import { Control, useController } from "react-hook-form";
 
-import { CalendarIcon } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../../popover";
 import { Calendar } from "../../calendar";
 import { Button } from "../../button";
@@ -14,10 +13,11 @@ import { useTranslations } from "next-intl";
 export interface DatePickerProps {
   name: string;
   control: Control<any, any>;
+  disabled?: boolean;
   className?: string;
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({ name, control, ...props }) => {
+const DatePicker: React.FC<DatePickerProps> = ({ name, control, disabled, ...props }) => {
   const { field, fieldState } = useController({ control, name });
   const t = useTranslations("mission.creation.placeholder");
   const date = field?.value;
@@ -27,6 +27,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, control, ...props }) => {
       <PopoverTrigger asChild>
         <Input
           value={date ? dayjs(date).format("LL") : t("startDate")}
+          disabled={disabled}
           className={clsx("text-left", !date && "text-neutral-500")}
         />
       </PopoverTrigger>
