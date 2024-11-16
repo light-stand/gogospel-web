@@ -67,6 +67,7 @@ import {
   mdiLockCheckOutline,
   mdiLogout,
   mdiBell,
+  mdiPlus,
 } from "@mdi/js";
 
 export const icons = {
@@ -137,6 +138,7 @@ export const icons = {
   bell: mdiBell,
   logout: mdiLogout,
   "lock-check-outline": mdiLockCheckOutline,
+  plus: mdiPlus,
 };
 
 export type MaterialIconType = keyof typeof icons | null;

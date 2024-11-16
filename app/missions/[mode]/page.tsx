@@ -23,7 +23,7 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
   const missions = await repo.mission.list(mode, user?.id as string);
 
   return (
-    <div className="flex flex-col max-w-screen-lg mx-auto px-4 pt-8 gap-y-4 pb-12">
+    <div className="flex flex-col max-w-screen-lg mx-auto px-4 pt-8 gap-y-4 pb-12 relative h-screen">
       <h1 className="text-2xl font-bold">{t("screen.missions")}</h1>
       <div className="flex mx-auto gap-x-2">
         {missionListTypes.map((type) => (
@@ -43,6 +43,16 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
         // isLoading={isFetching}
         NoResultsComponent={() => <NoResults type={mode} />}
       />
+      {mode === "myMissions" && (
+        <div className="w-full flex justify-center absolute bottom-8">
+          <Link href="/missions/create/start">
+            <Button className="right-[50%] rounded-full aspect-square" variant="default">
+              {t("mission.creation.titles.start")}
+              <Icon name="plus" />
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
