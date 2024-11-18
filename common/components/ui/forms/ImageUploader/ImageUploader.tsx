@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
@@ -39,7 +40,7 @@ export const ImageUploder = ({ name = "", control, ...props }: ImageUploderProps
 
   return (
     <div
-      className="flex flex-col cursor-pointer  hover:opacity-80"
+      className={clsx("flex flex-col cursor-pointer hover:opacity-80", props.className)}
       onClick={() => fileInputRef.current?.click()}
     >
       <Avatar className="w-32 h-32 shadow-md">
