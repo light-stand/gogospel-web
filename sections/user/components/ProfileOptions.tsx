@@ -5,27 +5,24 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { Icon } from "@/components/ui";
-import { MaterialIconType } from "@/components/ui/foundation/Icon";
-
-export type ProfileOptions = {
-  label?: string;
-  items: {
-    icon: MaterialIconType;
-    label: string;
-    href?: string;
-    action?: "logout" | "openVerificationCode";
-    disabled?: boolean;
-  }[];
-}[];
+import { signOut } from "@/app/auth/actions";
+import { ProfileOption } from "@/user/domain/profileOptions";
 
 interface ProfileOptionsProps {
-  options: ProfileOptions;
-  actions?: Record<string, VoidFunction>;
+  options: ProfileOption;
 }
 
-export const ProfileOptions = ({ options, actions = {} }: ProfileOptionsProps) => {
+export const ProfileOptions = ({ options }: ProfileOptionsProps) => {
   const router = useRouter();
   const t = useTranslations();
+
+  const actions = {
+    logout: async () => {
+      await signOut();
+      window.location.href = "/"; // Trigger a full page reload
+    },
+    openVerificationCode: () => router.push("/verification"),
+  };
 
   return (
     <div className="justify-between gap-y-2">
