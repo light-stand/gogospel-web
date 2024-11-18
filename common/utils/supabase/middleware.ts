@@ -59,6 +59,7 @@ export async function updateSession(request: NextRequest) {
   // Anonymous user trying to access private screens
   if (
     !user &&
+    !request.nextUrl.pathname.startsWith("/") &&
     !request.nextUrl.pathname.startsWith("/auth") &&
     !request.nextUrl.pathname.startsWith("/explore") &&
     !request.nextUrl.pathname.startsWith("/mission")

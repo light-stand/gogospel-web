@@ -22,7 +22,10 @@ export const SignupForm = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  const submit = form.handleSubmit(signup);
+  const submit = form.handleSubmit(async (data) => {
+    await signup(data);
+    window.location.href = "/"; // Trigger a full page reload
+  });
 
   return (
     <Form {...form}>
@@ -66,11 +69,7 @@ export const SignupForm = () => {
             </FormItem>
           )}
         />
-        <Button
-          className="mt-4 px-12 self-center"
-          type="submit"
-          formAction={submit}
-        >
+        <Button className="mt-4 px-12 self-center" type="submit" formAction={submit}>
           {t("action.next")}
         </Button>
       </form>

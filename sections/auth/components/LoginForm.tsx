@@ -24,7 +24,10 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const submit = form.handleSubmit(login);
+  const submit = form.handleSubmit(async (data) => {
+    await login(data);
+    window.location.href = "/"; // Trigger a full page reload
+  });
 
   return (
     <Form {...form}>
