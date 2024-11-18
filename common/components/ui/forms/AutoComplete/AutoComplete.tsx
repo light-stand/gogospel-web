@@ -1,7 +1,5 @@
+"use client";
 import React, { useState } from "react";
-import clsx from "clsx";
-import colors from "tailwindcss/colors";
-import { Icon, MaterialIconType } from "../../foundation";
 
 import {
   Command,
@@ -14,7 +12,7 @@ import {
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface AutoCompleteProps {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { camelCase, kebabCase } from "lodash";
 
 import { createSSRClient } from "@/interface/apiSSR";
 import { MissionList } from "@/mission/components/MissionList";
@@ -11,7 +12,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Icon, MaterialIconType } from "@/components/ui";
 import NoResults from "@/components/ui/feedback/NoResults";
-import { camelCase, kebabCase } from "lodash";
 
 export default async function MissionListPage({ params }: { params: Promise<{ mode: string }> }) {
   const { client, repo } = await createSSRClient();
@@ -28,7 +28,7 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
       <div className="flex mx-auto gap-x-2">
         {missionListTypes.map((type) => (
           <Link href={`/missions/${kebabCase(type)}`} key={type}>
-            <Button variant={mode === type ? "default" : "ghost"}>
+            <Button variant={mode === type ? "default" : "ghost"} size="sm">
               <Icon name={listTypesIcons[type] as MaterialIconType} />
               {t(`mission.list.types.${type}`)}
             </Button>
@@ -46,7 +46,7 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
       {mode === "myMissions" && (
         <div className="w-full flex justify-center absolute bottom-8">
           <Link href="/missions/create/start">
-            <Button className="right-[50%] rounded-full aspect-square" variant="default">
+            <Button size="lg" variant="default">
               {t("mission.creation.titles.start")}
               <Icon name="plus" />
             </Button>

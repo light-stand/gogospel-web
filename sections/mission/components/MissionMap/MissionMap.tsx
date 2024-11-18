@@ -30,11 +30,19 @@ export const MissionMap = () => {
     (pathname: string) => {
       if (!map) return;
       const missionPrefix = "/mission/";
-      if (!pathname.startsWith(missionPrefix)) return;
+      if (!pathname.startsWith(missionPrefix)) {
+        map.setCenter({ lat: 0, lng: 0 });
+        map.setZoom(2);
+        return;
+      }
 
       const id = pathname.replace(missionPrefix, "");
       const mission = missions?.find((mission) => mission.id === parseInt(id));
-      if (!mission) return;
+      if (!mission) {
+        map.setCenter({ lat: 0, lng: 0 });
+        map.setZoom(2);
+        return;
+      }
 
       const { lat, long } = mission;
       map.setCenter({ lat: lat as number, lng: long as number });

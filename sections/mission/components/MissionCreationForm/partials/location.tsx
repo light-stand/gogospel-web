@@ -63,13 +63,13 @@ export const LocationSection = ({ form }: { form: UseFormReturn<MissionCreationF
     <div className="flex flex-col space-y-2">
       <h2 className="text-neutral-700 font-bold text-xl">{t("titles.location")}</h2>
       <span className="font-bold text-neutral-500">{t(`helper.location`)}</span>
-      <div className="flex flex-row space-y-2 p-2 rounded-xl shadow-lg border border-neutral-100">
-        <div className="flex-1 p-4 space-y-4">
+      <div className="flex flex-col md:flex-row space-y-2 p-2 rounded-xl shadow-lg border border-neutral-100">
+        <div className="md:w-1/3 p-4 space-y-4">
           <FormField
             control={form.control}
             name="location"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col">
                 <FormLabel>{t("titles.location")}</FormLabel>
                 <FormControl>
                   <AutoComplete
@@ -96,7 +96,7 @@ export const LocationSection = ({ form }: { form: UseFormReturn<MissionCreationF
             </p>
           )}
         </div>
-        <div className="flex-[2] h-[300px] rounded-xl overflow-clip bg-neutral-500 relative">
+        <div className="md:w-2/3 h-[300px] rounded-xl overflow-hidden bg-neutral-500 relative">
           {isLoaded && (
             <GoogleMap
               options={{

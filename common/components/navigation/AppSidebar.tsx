@@ -42,7 +42,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationOptions.map((item) => {
-                const isActive = pathname === item.url;
+                const isActive = pathname.includes(item.url);
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild className="flex-col h-14">
