@@ -22,26 +22,6 @@ export interface MissionCardProps {
 const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
   const t = useTranslations();
 
-  // const onCardPress = () => {
-  //   redirect(`/mission/${mission.id}`);
-  // };
-
-  // const getMissionDistance = async () => {
-  //   const userLocation = await getLocation();
-  //   if (!userLocation || !mission.lat || !mission.long) return;
-  //   const distance = haversineDistance(
-  //     userLocation?.latitude,
-  //     userLocation?.longitude,
-  //     mission.lat,
-  //     mission.long
-  //   );
-  //   setDistance(Math.floor(distance));
-  // };
-
-  // useEffect(() => {
-  //   getMissionDistance();
-  // }, []);
-
   if (!mission.id) return null;
 
   const { title, categories, duration, images, user_profile, approved } = mission;
@@ -49,14 +29,13 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
   return (
     <div
       className={clsx(
-        "w-[16rem] relative h-[16rem]",
-        "flex justify-between gap-x-2",
+        "relative h-[16rem]",
+        "flex flex-col justify-between gap-x-2",
         "bg-white shadow-md rounded-lg overflow-hidden",
         className
       )}
-      // onClick={onCardPress}
     >
-      <div className="absolute aspect-square rounded-2xl">
+      <div className="rounded-2xl h-[8rem]">
         <Image
           src={(images ? images[0] : user_profile?.images[0]) || ""}
           className="flex-1 object-cover w-full h-full"
@@ -65,7 +44,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
           width={200}
         />
       </div>
-      <div className="absolute bottom-0 p-2 flex flex-col justify-end z-10 w-full bg-white flex-0">
+      <div className="p-2 h-[8rem] flex flex-col justify-end z-10 w-full bg-white">
         <span className="text-lg font-bold line-clamp-1">{title}</span>
         <div className="flex flex-col w-full">
           <div className="flex flex-row items-center">

@@ -23,7 +23,7 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
   const missions = await repo.mission.list(mode, user?.id as string);
 
   return (
-    <div className="flex flex-col max-w-screen-lg mx-auto px-4 pt-8 gap-y-4 pb-12 relative h-screen">
+    <div className="flex flex-col max-w-screen-lg mx-auto px-2 pt-4 md:px-4 md:pt-8 gap-y-4 relative h-screen">
       <h1 className="text-2xl font-bold">{t("screen.missions")}</h1>
       <div className="flex mx-auto gap-x-2">
         {missionListTypes.map((type) => (
@@ -36,15 +36,9 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
         ))}
       </div>
 
-      <MissionList
-        // onRefresh={refetch}
-        className="grid-cols-3"
-        missions={missions || []}
-        // isLoading={isFetching}
-        NoResultsComponent={() => <NoResults type={mode} />}
-      />
+      <MissionList missions={missions || []} NoResultsComponent={() => <NoResults type={mode} />} />
       {mode === "myMissions" && (
-        <div className="w-full flex justify-center absolute bottom-8">
+        <div className="w-full flex justify-center absolute bottom-8 z-30">
           <Link href="/missions/create/start">
             <Button size="lg" variant="default">
               {t("mission.creation.titles.start")}
