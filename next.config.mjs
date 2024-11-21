@@ -18,6 +18,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "ucarecdn.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

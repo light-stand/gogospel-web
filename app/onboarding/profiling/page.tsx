@@ -16,10 +16,14 @@ export default function Onboarding() {
   const t = useTranslations();
   const [step, setStep] = useState<Step>(Step.Welcome);
   const router = useRouter();
-  const { form, onSubmit } = useProfiling({ onSuccess: () => router.push("/") });
+  const { form, onSubmit } = useProfiling({ onSuccess: () => router.push("/my-profile") });
 
   const goPrev = async () => {
-    if (step === Step.Welcome) return await signOut();
+    if (step === Step.Welcome) {
+      await signOut();
+      window.location.href = "/"; // Trigger a full page reload
+      return;
+    }
     setStep((p) => p - 1);
   };
 
