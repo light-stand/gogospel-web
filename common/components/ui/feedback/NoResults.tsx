@@ -13,6 +13,7 @@ type NoResultsType =
 
 type NoResultsProps = {
   type: NoResultsType;
+  className?: string;
 };
 
 const noResultsIllustration = {
@@ -25,7 +26,7 @@ const noResultsIllustration = {
 };
 
 const noResultsLinks: Partial<Record<NoResultsType, string>> = {
-  myMissions: "/mission/creation",
+  myMissions: "/missions/create/start",
 };
 
 export const NoResults = async ({ type, ...props }: NoResultsProps) => {
@@ -39,9 +40,8 @@ export const NoResults = async ({ type, ...props }: NoResultsProps) => {
         alt="No results illustration"
         width={300}
         height={300}
-        // resizeMode="contain"
       />
-      <div className="flex flex-col px-4">
+      <div className="flex flex-col px-4 items-center">
         <span className="text-neutral-800 text-xl font-bold mt-2 mb-auto text-center">
           {t(`noResults.${type}.title`)}
         </span>

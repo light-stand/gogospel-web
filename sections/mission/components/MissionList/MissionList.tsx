@@ -21,7 +21,7 @@ const MissionList: React.FC<MissionListProps> = ({
   return (
     <div
       className={clsx(
-        "grid-cols-[repeat(auto-fill,minmax(240px,2fr))] grid gap-4",
+        missions.length > 0 && "grid-cols-[repeat(auto-fill,minmax(240px,2fr))] grid gap-4",
         "pb-8 px-1 justify-center items-center",
         "overflow-y-overlay overflow-x-hidden",
         className

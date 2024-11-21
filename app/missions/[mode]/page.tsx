@@ -36,12 +36,15 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
         ))}
       </div>
 
-      <MissionList missions={missions || []} NoResultsComponent={() => <NoResults type={mode} />} />
+      <MissionList
+        missions={missions || []}
+        NoResultsComponent={() => <NoResults type={mode} className="max-w-sm mx-auto" />}
+      />
       {mode === "myMissions" && (
         <div className="w-full flex justify-center absolute bottom-8 z-30">
           <Link href="/missions/create/start">
             <Button size="lg" variant="default">
-              {t("mission.creation.titles.start")}
+              {t("noResults.myMissions.button")}
               <Icon name="plus" />
             </Button>
           </Link>
