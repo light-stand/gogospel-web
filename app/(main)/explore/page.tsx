@@ -20,7 +20,7 @@ export default async function Explore() {
         </p>
         <span className="text-gray-400 text-sm font-bold">Found {missions.length} missions</span>
       </div>
-      <MissionList missions={missions} />
+      <MissionList className="pb-8" missions={missions} />
     </div>
   );
 }
