@@ -1,30 +1,30 @@
-import { getLocales } from "expo-localization";
-import { initReactI18next } from "react-i18next";
-import i18n from "i18next";
-import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-import duration from "dayjs/plugin/duration";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { getRequestConfig } from "next-intl/server";
+import { headers } from "next/headers";
 
-import "dayjs/locale/es";
+const SUPPORTED_LOCALES = ["en", "es"] as const;
+const DEFAULT_LOCALE = "en";
 
-import en from "@/assets/locales/en.json";
-import es from "@/assets/locales/es.json";
+function parseAcceptLanguage(header: string): string {
+  // Get first preferred language from Accept-Language
+  const preferred = header
+    .split(",")[0]
+    .trim()
+    .split("-")[0] // Get primary language tag
+    .toLowerCase();
 
-const language = getLocales()[0].languageCode as string;
+  // Return if supported, otherwise fallback
+  return SUPPORTED_LOCALES.includes(preferred as (typeof SUPPORTED_LOCALES)[number])
+    ? preferred
+    : DEFAULT_LOCALE;
+}
 
-dayjs.extend(localizedFormat);
-dayjs.extend(duration);
-dayjs.extend(relativeTime);
+export default getRequestConfig(async () => {
+  const headersList = headers();
+  const acceptLanguage = headersList.get("accept-language") || DEFAULT_LOCALE;
+  const locale = parseAcceptLanguage(acceptLanguage);
 
-dayjs.locale(language);
-
-i18n.use(initReactI18next).init({
-  compatibilityJSON: "v3",
-  resources: { en, es },
-  fallbackLng: "en",
-  lng: getLocales()[0].languageCode as string,
-  interpolation: {
-    escapeValue: false,
-  },
+  return {
+    locale,
+    messages: (await import(`../../shared/assets/locales/${locale}.json`)).default.translation,
+  };
 });

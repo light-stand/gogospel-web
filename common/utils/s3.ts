@@ -1,62 +1,42 @@
-import { PutObjectCommand, S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import "react-native-get-random-values";
-import "react-native-url-polyfill/auto";
-import { ReadableStream } from "web-streams-polyfill";
-//@ts-ignore
-globalThis.ReadableStream = ReadableStream;
+import { ApiConnection } from "@/interface/api";
+// import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 const options = {
-  keyPrefix: "uploads",
   bucket: process.env.NEXT_PUBLIC_S3_BUCKET,
-  region: process.env.NEXT_PUBLIC_S3_REGION,
 };
-
-const client = new S3Client({
-  forcePathStyle: true,
-  region: process.env.NEXT_PUBLIC_S3_REGION,
-  endpoint: process.env.NEXT_PUBLIC_S3_URL,
-  credentials: {
-    accessKeyId: process.env.NEXT_PUBLIC_S3_ACCESS_ID as string,
-    secretAccessKey: process.env.NEXT_PUBLIC_S3_SECRET as string,
-  },
-});
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_SB_API_REST_URL}/storage/v1/object/public/${options.bucket}/`;
 
-export type S3File = {
-  uri: string;
-  type: string;
-  name: string;
+const generateFileName = (fileName: string) => {
+  const hash = Math.random().toString(32).substring(2);
+  const time = Date.now();
+  const ext = fileName.split(".").pop();
+  return `public/${time}_${hash}.${ext}`;
 };
 
-export const uploadFile = async (file: S3File) => {
-  try {
-    const resp = await fetch(file.uri);
-    const imageBody = await resp.blob();
-    const key = `${options.keyPrefix}/${file.name}`;
-    await client.send(
-      new PutObjectCommand({
-        Bucket: options.bucket,
-        Key: key,
-        Body: imageBody,
-        ACL: "public-read",
-      })
-    );
-    return `${BASE_URL}${key}`;
-  } catch (err) {
-    console.log(err);
-  }
+export const uploadFile = async (file: File, client: ApiConnection["client"]) => {
+  if (!process.env.NEXT_PUBLIC_S3_BUCKET) return;
+  const { data } = await client.storage
+    .from(process.env.NEXT_PUBLIC_S3_BUCKET)
+    .upload(generateFileName(file.name), file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
+  if (!data) return;
+
+  return `${BASE_URL}${data?.path}`;
 };
 
-export const deleteFile = async (url: string) => {
-  const command = new DeleteObjectCommand({
-    Bucket: options.bucket,
-    Key: url.replace(BASE_URL, ""),
-  });
+// export const deleteFile = async (url: string) => {
+//   const command = new DeleteObjectCommand({
+//     Bucket: options.bucket,
+//     Key: url.replace(BASE_URL, ""),
+//   });
 
-  try {
-    return await client.send(command);
-  } catch (err) {
-    console.error(err);
-  }
-};
+//   try {
+//     return await client.send(command);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
