@@ -28,9 +28,13 @@ export const MissionCreationForm = () => {
     },
   });
 
-  const onNextButtonClick = (e: any) => {
+  const { trigger } = form;
+
+  const onNextButtonClick = async (e: any) => {
     e.preventDefault();
     e.stopPropagation();
+    const formValid = await trigger();
+    if (!formValid) return;
     summaryOpen ? onSubmit() : setSummaryOpen(true);
   };
 
@@ -58,9 +62,21 @@ export const MissionCreationForm = () => {
               </>
             )}
             {summaryOpen && <Summary form={form} />}
-            <Button className="ml-auto mt-8" size="lg" onClick={onNextButtonClick}>
-              {t("next")}
-            </Button>
+            <div className="mt-8 w-full flex">
+              {summaryOpen && (
+                <Button
+                  className=""
+                  size="lg"
+                  variant="ghost"
+                  onClick={() => setSummaryOpen(false)}
+                >
+                  {t("back")}
+                </Button>
+              )}
+              <Button className="ml-auto" size="lg" onClick={onNextButtonClick}>
+                {t("next")}
+              </Button>
+            </div>
           </div>
         </form>
       </Form>

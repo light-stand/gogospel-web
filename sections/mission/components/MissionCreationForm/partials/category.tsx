@@ -31,7 +31,7 @@ export const CategorySection = ({ form }: { form: UseFormReturn<MissionCreationF
         render={({ field }) => (
           <TagCloud
             innerClassName="max-h-[24rem] overflow-y-scroll md:overflow-hidden md:max-h-none"
-            name="interests"
+            name="categories"
             max={10}
             options={missionTypeOptions}
             control={form.control}
