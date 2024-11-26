@@ -2,8 +2,6 @@ import React from "react";
 import { capitalize } from "lodash";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
-import Link from "next/link";
-import dynamic from "next/dynamic";
 
 import Image from "next/image";
 import dayjs from "@/utils/date";
@@ -37,7 +35,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
     >
       <div className="rounded-2xl h-[8rem]">
         <Image
-          src={(images ? images[0] : user_profile?.images[0]) || ""}
+          src={(images && images[0] ? images[0] : user_profile?.images[0]) || ""}
           className="flex-1 object-cover w-full h-full"
           alt="Mission"
           height={200}
