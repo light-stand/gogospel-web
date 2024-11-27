@@ -6,6 +6,10 @@ import { UserProfileRepository } from "@/user/interface/userProfileRepository";
 import { ConnectionRepository } from "@/connections/interface/connectionRepository";
 import { FeedbackRepository } from "@/feedback/interface/feedbackRepository";
 
+export enum SupabaseError {
+  Duplicated = "23505",
+}
+
 export type ApiConnection = {
   client: SupabaseClient;
   repo: {
