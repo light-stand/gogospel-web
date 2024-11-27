@@ -38,7 +38,7 @@ export default function Onboarding() {
   return (
     <main
       className={clsx(
-        "relative w-full max-w-screen-lg mx-auto h-screen",
+        "relative w-full max-w-screen-lg mx-auto h-full",
         "flex flex-col flex-1 md:justify-center items-center p-4"
       )}
     >

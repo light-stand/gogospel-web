@@ -23,7 +23,7 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
   const missions = await repo.mission.list(mode, user?.id as string);
 
   return (
-    <div className="flex flex-col max-w-screen-lg mx-auto px-2 pt-4 md:px-4 md:pt-8 gap-y-4 relative h-screen">
+    <div className="flex flex-col max-w-screen-lg mx-auto px-2 pt-4 md:px-4 md:pt-8 gap-y-4 relative flex-1">
       <h1 className="text-2xl font-bold">{t("screen.missions")}</h1>
       <div className="flex mx-auto gap-x-2">
         {missionListTypes.map((type) => (

@@ -14,7 +14,7 @@ export default async function MissionCreation() {
   const [profile] = await repo.userProfile.get(["user_id", "eq", user?.data?.user?.id]);
 
   return (
-    <div className="flex flex-col max-w-screen-lg mx-auto px-4 pt-8 gap-y-4 pb-24 relative h-screen justify-center items-center">
+    <div className="flex flex-col max-w-screen-lg mx-auto px-4 pt-8 gap-y-4 pb-24 relative h-full justify-center items-center">
       <h1 className="text-2xl font-bold">{t("mission.creation.titles.start")}</h1>
       <Image
         src={launching}
