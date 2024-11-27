@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 import { createSSRClient } from "@/interface/apiSSR";
 import { MissionList } from "@/mission/components/MissionList";
 
@@ -12,15 +14,24 @@ export default async function Explore() {
   });
 
   return (
-    <div className="shadow-2xl z-10 h-full flex flex-col w-[36rem]">
-      <div className="flex flex-col p-4 gap-y-2">
+    <div className="md:shadow-2xl z-10 md:h-full flex flex-col md:flex-[0.7] w-full">
+      <div className="hidden md:flex flex-col p-4 gap-y-2">
         <h1 className="text-2xl font-bold">Explore</h1>
         <p className="text-gray-600">
           Explore missions around the world. Click on a mission to learn more.
         </p>
         <span className="text-gray-400 text-sm font-bold">Found {missions.length} missions</span>
       </div>
-      <MissionList className="pb-8" missions={missions} />
+      <MissionList
+        className={clsx(
+          "pb-2 md:pb-8 flex flex-row md:grid flex-nowrap",
+          "overflow-x-scroll",
+          "md:overflow-y-overlay md:overflow-x-hidden",
+          "max-w-[100vw] md:w-full md:mt-0",
+          "absolute left-0 md:relative bottom-0 md:bottom-auto"
+        )}
+        missions={missions}
+      />
     </div>
   );
 }

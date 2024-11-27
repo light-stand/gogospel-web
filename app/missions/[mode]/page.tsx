@@ -39,7 +39,7 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
       <MissionList
         missions={missions || []}
         NoResultsComponent={() => <NoResults type={mode} className="max-w-sm mx-auto" />}
-        className="pb-32 no-scrollbar"
+        className="pb-32 no-scrollbar grid"
       />
       {mode === "myMissions" && (
         <Link href="/missions/create/start" className="absolute bottom-8 z-30 right-6">
