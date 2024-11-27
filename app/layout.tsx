@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
 import Providers from "@/common/context/providers";
 import { AppSidebar } from "@/common/components/navigation/AppSidebar";
 import "./globals.css";
-import { NextIntlClientProvider } from "next-intl";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -27,8 +27,12 @@ export default async function RootLayout({
       <body className={`${nunito.className} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
-            <AppSidebar />
-            <main className="w-full relative">{children}</main>
+            <div className="h-screen w-screen flex flex-col-reverse md:flex-row flex-1">
+              <AppSidebar />
+              <main className="w-full relative flex md:h-screen overflow-hidden flex-1">
+                {children}
+              </main>
+            </div>
           </Providers>
         </NextIntlClientProvider>
       </body>

@@ -27,7 +27,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
   return (
     <div
       className={clsx(
-        "relative h-[16rem]",
+        "relative h-[16rem] min-w-[220px]",
         "flex flex-col justify-between gap-x-2",
         "bg-white shadow-md rounded-lg overflow-hidden",
         className

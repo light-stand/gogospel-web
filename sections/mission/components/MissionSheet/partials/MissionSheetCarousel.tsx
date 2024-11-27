@@ -16,7 +16,6 @@ export const MissionSheetCarousel = ({ mission }: MissionSheetCarouselProps) => 
       ? mission?.images
       : mission?.user_profile?.images) || [];
 
-  console.log(images);
   return (
     <section className="w-full aspect-video bg-neutral-200 overflow-hidden rounded-xl">
       <div className="h-full" ref={ref}>

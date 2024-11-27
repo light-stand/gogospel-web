@@ -21,7 +21,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="flex h-full flex-col items-center pt-20 gap-4">
+    <main className="flex h-full flex-col items-center pt-20 gap-4 m-auto">
       <Image src={errorImage} alt="Error" width={200} height={200} />
       <h1 className="text-center text-2xl text-neutral-600 font-bold">
         {t("alerts.somethingWentWrong.title")}

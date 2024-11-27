@@ -18,7 +18,7 @@ export default async function MissionPage({ params }: { params: { id: string } }
   );
 
   return (
-    <div className="shadow-2xl z-10 h-screen flex flex-col p-4 w-[32rem]">
+    <div className="shadow-2xl z-10 h-full flex flex-col p-4 w-[32rem]">
       <Link href={"/explore"}>
         <Button variant="outline" className="rounded-full mb-2" size="icon">
           <Icon name="chevron-left" size={0.8} />

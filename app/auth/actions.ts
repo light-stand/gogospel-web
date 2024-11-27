@@ -24,7 +24,7 @@ export async function signOut() {
     const { client } = await createSSRClient();
     const { error } = await client.auth.signOut();
     if (error) throw { message: "Failed to sign out" };
-  } catch (e) {
+  } catch {
     return { message: "Failed to sign out" };
   }
 }

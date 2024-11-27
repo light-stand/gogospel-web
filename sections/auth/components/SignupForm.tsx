@@ -69,7 +69,7 @@ export const SignupForm = () => {
             </FormItem>
           )}
         />
-        <Button className="mt-4 px-12 self-center" type="submit" formAction={submit}>
+        <Button className="mt-4 px-12 self-center" type="submit" formAction={() => submit()}>
           {t("action.next")}
         </Button>
       </form>

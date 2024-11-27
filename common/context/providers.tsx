@@ -12,7 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <ApiClientProvider>
-      <SidebarProvider className="w-full">
+      <SidebarProvider className="w-full h-full">
         <ModalProvider>
           <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
         </ModalProvider>
