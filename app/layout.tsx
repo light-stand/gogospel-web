@@ -27,7 +27,7 @@ export default async function RootLayout({
       <body className={`${nunito.className} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
-            <div className="h-screen w-screen flex flex-col-reverse md:flex-row flex-1">
+            <div className="h-screen w-screen flex flex-col-reverse md:flex-row flex-1 bg-neutral-100">
               <AppSidebar />
               <main className="w-full relative flex md:h-screen overflow-hidden flex-1">
                 {children}
