@@ -58,12 +58,14 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Link href="/auth/signup" className="self-center">
-          {t("auth.messages.dontHaveAccount")}
-        </Link>
-        <Button className="mt-4 px-12 self-center" type="submit" formAction={() => submit()}>
-          {t("action.next")}
-        </Button>
+        <div className="flex justify-around items-center mt-4 gap-x-4">
+          <Link href="/auth/signup" className="self-center underline text-neutral-500">
+            {t("auth.messages.dontHaveAccount")}
+          </Link>
+          <Button className="px-12 self-center" type="submit" formAction={() => submit()}>
+            {t("action.next")}
+          </Button>
+        </div>
       </form>
     </Form>
   );
