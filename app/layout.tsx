@@ -23,13 +23,13 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className="overflow-hidden">
       <body className={`${nunito.className} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <div className="h-screen w-screen flex flex-col-reverse md:flex-row flex-1 bg-neutral-100">
               <AppSidebar />
-              <main className="w-full relative flex md:h-screen overflow-hidden flex-1">
+              <main className="w-full relative flex md:h-screen flex-1 overflow-y-scroll">
                 {children}
               </main>
             </div>
