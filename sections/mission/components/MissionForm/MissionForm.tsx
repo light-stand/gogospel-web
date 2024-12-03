@@ -17,12 +17,13 @@ import { Button } from "@/components/ui/button";
 import { Summary } from "./partials/summary";
 import { MissionCreationFields } from "@/mission/domain/MissionCreationForm";
 
-type MissionFormProps = {
+export type MissionFormProps = {
   form: UseFormReturn<MissionCreationFields>;
   onSubmit: () => void;
+  variant?: "edit" | "create";
 };
 
-export const MissionForm = ({ form, onSubmit }: MissionFormProps) => {
+export const MissionForm = ({ form, onSubmit, variant }: MissionFormProps) => {
   const t = useTranslations("action");
   const [summaryOpen, setSummaryOpen] = useState(false);
 
@@ -39,7 +40,7 @@ export const MissionForm = ({ form, onSubmit }: MissionFormProps) => {
   return (
     <>
       <Form {...form}>
-        <form className="max-w-screen-md mx-auto">
+        <form className="max-w-screen-md mx-auto pb-12">
           {!summaryOpen && (
             <Image
               className="mx-auto"
@@ -59,7 +60,7 @@ export const MissionForm = ({ form, onSubmit }: MissionFormProps) => {
                 <ImageSection form={form} />
               </>
             )}
-            {summaryOpen && <Summary form={form} />}
+            {summaryOpen && <Summary form={form} variant={variant} />}
             <div className="mt-8 w-full flex">
               {summaryOpen && (
                 <Button
