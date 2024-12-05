@@ -35,7 +35,7 @@ export const ProfileOptions = ({ options }: ProfileOptionsProps) => {
               onClick={href ? () => router.push(href) : action ? actions[action] : undefined}
               className={clsx(
                 disabled && "opacity-50",
-                "cursor-pointer hover:bg-neutral-100 rounded-md"
+                "cursor-pointer hover:bg-neutral-200 transition rounded-md"
               )}
             >
               <div className="flex items-center py-4 px-2">

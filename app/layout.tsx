@@ -29,7 +29,7 @@ export default async function RootLayout({
           <Providers>
             <div className="h-screen w-screen flex flex-col-reverse md:flex-row flex-1 bg-neutral-100">
               <AppSidebar />
-              <main className="w-full relative flex md:h-screen flex-1 overflow-y-scroll">
+              <main className="w-full relative md:h-screen flex-1 overflow-y-scroll">
                 {children}
               </main>
             </div>

@@ -32,13 +32,7 @@ export default function ProfilingFormA({ form }: { form: UseFormReturn<Profiling
   );
 
   return (
-    <section
-      className={clsx(
-        "flex flex-col items-center md:justify-center",
-        "max-w-screen-lg mx-auto",
-        "overflow-y-scroll md:overflow-hidden"
-      )}
-    >
+    <section className={clsx("flex flex-col items-center md:justify-center")}>
       <h1 className="text-2xl font-bold w-full mb-4">{t("profiling.titles.name")}</h1>
       <Form {...form}>
         <form>

@@ -19,7 +19,7 @@ export default async function Profile() {
   const { name, images, created_at, is_verified } = profile;
 
   return (
-    <div className="flex flex-col max-w-screen-sm mx-auto px-4 w-full pb-8">
+    <div className="flex flex-col max-w-screen-sm mx-auto px-4 w-full">
       <div className="items-start justify-between gap-y-4 pt-8 pb-2">
         {/*=Image=*/}
         <div className="flex items-center w-full">
