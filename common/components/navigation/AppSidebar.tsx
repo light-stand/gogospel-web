@@ -50,14 +50,14 @@ const NavButton = ({
 
 export function AppSidebar() {
   const pathname = usePathname();
-  const { setOpenModal } = useModal();
+  const { openModal } = useModal();
   const t = useTranslations();
   const router = useRouter();
   const { session } = useAuthStore();
   const { isMobile } = useSidebar();
 
   const onOptionClick = async (url: (typeof navigationOptions)[number]["url"]) => {
-    return session?.user || url === "/explore" ? router.push(url) : setOpenModal("auth");
+    return session?.user || url === "/explore" ? router.push(url) : openModal("auth");
   };
 
   return (

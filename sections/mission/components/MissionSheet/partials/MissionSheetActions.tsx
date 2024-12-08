@@ -5,13 +5,13 @@ import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import { Icon } from "@/components/ui";
+import { Button } from "@/components/ui/button";
 import { Mission } from "@/mission/domain/Mission";
 import { useUserStore } from "@/user/store/useUserStore";
-// import { useAuthModal } from "@/auth/context/AuthModalContext";
 import { useFavoriteActions } from "@/mission/application/useFavoriteActions";
 import { checkIsFavorite } from "@/mission/utils/checkIsFavorite";
-import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/ui";
+import { useModal } from "@/context/ModalContext";
 
 interface MissionSheetActionsProps {
   mission?: Mission;
@@ -21,7 +21,7 @@ export const MissionSheetActions = ({ mission }: MissionSheetActionsProps) => {
   const t = useTranslations();
   const router = useRouter();
   const { user } = useUserStore();
-  // const { openModal } = useAuthModal();
+  const { openModal } = useModal();
   const { addFavorite, removeFavorite, isLoading } = useFavoriteActions();
 
   const isFavorite = useMemo(
@@ -36,8 +36,9 @@ export const MissionSheetActions = ({ mission }: MissionSheetActionsProps) => {
   };
 
   const onJoin = () => {
-    // if (!user?.id) return openModal();
-    router.push(`/connections/request/${mission?.id}`);
+    console.log(user);
+    if (!user?.id) return openModal("auth");
+    openModal("joinMission", mission);
   };
 
   return (
