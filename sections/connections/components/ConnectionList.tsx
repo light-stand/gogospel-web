@@ -14,7 +14,9 @@ export const ConnectionList = async () => {
         connections.map((connection) => (
           <ConnectionListItem key={connection.id} connection={connection} />
         ))}
-      {connections.length === 0 && <NoResults type="connections" className="max-w-sm mx-auto" />}
+      {connections.length === 0 && (
+        <NoResults type="connections" className="p-4 max-w-sm mx-auto" />
+      )}
     </div>
   );
 };

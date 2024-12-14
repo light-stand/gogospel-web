@@ -2,9 +2,8 @@
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Icon } from "@/components/ui";
 import { useUserStore } from "@/user/store/useUserStore";
@@ -19,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export const ConnectionListItem = ({ connection }: { connection: Connection }) => {
+  const pathname = usePathname();
   const t = useTranslations();
   const router = useRouter();
   const { user } = useUserStore();
@@ -52,7 +52,12 @@ export const ConnectionListItem = ({ connection }: { connection: Connection }) =
   const canRestore = user.id === user2_id && status === ConnectionStatus.Rejected;
 
   return (
-    <div className={clsx("border-b border-neutral-300 py-3 px-2 flex items-center")}>
+    <div
+      className={clsx(
+        "border-b border-neutral-300 py-3 px-2 flex items-center",
+        pathname.includes(`/connections/${id}`) && "bg-neutral-100"
+      )}
+    >
       <Link href={`/profile/${user.id === user1_id ? user2_id : user1_id}`}>
         <div
           className={clsx(
@@ -78,7 +83,7 @@ export const ConnectionListItem = ({ connection }: { connection: Connection }) =
         onClick={() =>
           isPending || status === ConnectionStatus.Rejected
             ? alert(t("connections.submission.errors.notAccepted"))
-            : redirect(`/connections/${id}`)
+            : router.push(`/connections/${id}`)
         }
       >
         <span className={"font-bold text-base"}>{data.user}</span>
