@@ -7,6 +7,7 @@ type NoResultsType =
   | "myMissions"
   | "favorites"
   | "involved"
+  | "selectChat"
   | "connections"
   | "feedbackReceived"
   | "feedbackGiven";
@@ -23,6 +24,7 @@ const noResultsIllustration = {
   connections: require("@/assets/images/illustration/chatting.png"),
   feedbackReceived: require("@/assets/images/illustration/feedback.png"),
   feedbackGiven: require("@/assets/images/illustration/feedback2.png"),
+  selectChat: require("@/assets/images/illustration/message.png"),
 };
 
 const noResultsLinks: Partial<Record<NoResultsType, string>> = {
