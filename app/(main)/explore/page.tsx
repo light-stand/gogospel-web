@@ -26,9 +26,8 @@ export default async function Explore() {
         className={clsx(
           "pb-2 md:pb-8 flex flex-row md:grid flex-nowrap",
           "overflow-x-scroll",
-          "md:overflow-y-overlay md:overflow-x-hidden",
-          "max-w-[100vw] md:w-full md:mt-0",
-          "absolute left-0 md:relative bottom-0 md:bottom-auto"
+          "md:overflow-x-hidden",
+          "max-w-[100vw] md:w-full md:mt-0"
         )}
         missions={missions}
       />

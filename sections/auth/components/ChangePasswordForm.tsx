@@ -1,7 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -12,39 +11,26 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { LoginFields, loginSchema } from "@/auth/domain/Login";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useApi } from "@/common/context/ApiContext";
+import { useUserProfile } from "@/user/application/useUserProfile";
+import { ResetPassowordFields, resetPasswordSchema } from "@/auth/domain/ResetPassword";
+import { resetPassword } from "../interface/resetPasswordApi";
 
-import { login } from "@/app/auth/actions";
-
-export const LoginForm = () => {
+export const ChangePasswordForm = () => {
   const t = useTranslations();
-  const form = useForm<LoginFields>({
-    resolver: zodResolver(loginSchema),
+  const { client } = useApi();
+  const user = useUserProfile();
+  const form = useForm<ResetPassowordFields>({
+    resolver: zodResolver(resetPasswordSchema),
   });
 
-  const submit = form.handleSubmit(async (data) => {
-    await login(data);
-    window.location.href = "/"; // Trigger a full page reload
-  });
+  const submit = form.handleSubmit(resetPassword(client));
 
   return (
     <Form {...form}>
       <form className="space-y-4 w-full flex flex-col">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("auth.fields.email")}</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           control={form.control}
           name="password"
@@ -58,14 +44,22 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
-        <div className="flex justify-around items-center mt-4 gap-x-4">
-          <Link href="/auth/signup" className="self-center underline text-neutral-500">
-            {t("auth.messages.dontHaveAccount")}
-          </Link>
-          <Button className="px-12 self-center" type="submit" formAction={() => submit()}>
-            {t("action.next")}
-          </Button>
-        </div>
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("auth.fields.confirmPassword")}</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="mt-4 px-12 self-center" type="submit" formAction={() => submit()}>
+          {t("action.next")}
+        </Button>
       </form>
     </Form>
   );

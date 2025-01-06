@@ -72,6 +72,7 @@ import {
   mdiClockOutline,
   mdiUndo,
   mdiDotsVertical,
+  mdiSend,
 } from "@mdi/js";
 
 export const icons = {
@@ -147,6 +148,7 @@ export const icons = {
   "clock-outline": mdiClockOutline,
   undo: mdiUndo,
   "dots-vertical": mdiDotsVertical,
+  send: mdiSend,
 };
 
 export type MaterialIconType = keyof typeof icons | null;

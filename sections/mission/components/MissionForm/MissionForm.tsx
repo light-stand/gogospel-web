@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { UseFormReturn } from "react-hook-form";
 
 import { Form } from "@/components/ui/form";
 import {
@@ -12,21 +12,20 @@ import {
   LocationSection,
   ImageSection,
 } from "./partials";
-import { useMissionCreation } from "@/mission/application/useMissionCreation";
 import explore from "@/assets/images/illustration/explore.png";
 import { Button } from "@/components/ui/button";
 import { Summary } from "./partials/summary";
+import { MissionCreationFields } from "@/mission/domain/MissionCreationForm";
 
-export const MissionCreationForm = () => {
+export type MissionFormProps = {
+  form: UseFormReturn<MissionCreationFields>;
+  onSubmit: () => void;
+  variant?: "edit" | "create";
+};
+
+export const MissionForm = ({ form, onSubmit, variant }: MissionFormProps) => {
   const t = useTranslations("action");
-  const router = useRouter();
   const [summaryOpen, setSummaryOpen] = useState(false);
-  const { form, onSubmit } = useMissionCreation({
-    onSuccess: () => {
-      router.replace("/missions/my-missions");
-      router.refresh();
-    },
-  });
 
   const { trigger } = form;
 
@@ -41,7 +40,7 @@ export const MissionCreationForm = () => {
   return (
     <>
       <Form {...form}>
-        <form className="max-w-screen-md mx-auto">
+        <form className="max-w-screen-md mx-auto pb-12">
           {!summaryOpen && (
             <Image
               className="mx-auto"
@@ -61,7 +60,7 @@ export const MissionCreationForm = () => {
                 <ImageSection form={form} />
               </>
             )}
-            {summaryOpen && <Summary form={form} />}
+            {summaryOpen && <Summary form={form} variant={variant} />}
             <div className="mt-8 w-full flex">
               {summaryOpen && (
                 <Button

@@ -39,10 +39,10 @@ export default async function MissionListPage({ params }: { params: Promise<{ mo
       <MissionList
         missions={missions || []}
         NoResultsComponent={() => <NoResults type={mode} className="max-w-sm mx-auto" />}
-        className="pb-32 no-scrollbar grid"
+        className="pb-32 grid"
       />
       {mode === "myMissions" && (
-        <Link href="/missions/create/start" className="absolute bottom-8 z-30 right-6">
+        <Link href="/missions/create/start" className="fixed bottom-8 z-30 right-6">
           <Button size="lg" variant="default">
             {t("noResults.myMissions.button")}
             <Icon name="plus" />

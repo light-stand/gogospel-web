@@ -9,8 +9,15 @@ import { Mission } from "@/mission/domain/Mission";
 import { useUserProfile } from "@/user/application/useUserProfile";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { MissionFormProps } from "../MissionForm";
 
-export const Summary = ({ form }: { form: UseFormReturn<MissionCreationFields> }) => {
+export const Summary = ({
+  form,
+  variant,
+}: {
+  form: UseFormReturn<MissionCreationFields>;
+  variant: MissionFormProps["variant"];
+}) => {
   const {
     title,
     description,
@@ -42,19 +49,23 @@ export const Summary = ({ form }: { form: UseFormReturn<MissionCreationFields> }
 
   return (
     <div className="w-[32rem] mx-auto">
-      <h1 className="font-bold text-3xl mb-4 text-center">
-        {t("mission.creation.titles.summary")}
-      </h1>
-      <Image
-        src={require("@/assets/images/illustration/celebration.png")}
-        className="mx-auto"
-        width={400}
-        height={400}
-        alt="Mission summary"
-      />
-      <span className="text-neutral-500 font-bold my-2 text-center">
-        {t("mission.creation.helper.summary")}
-      </span>
+      {variant === "create" && (
+        <>
+          <h1 className="font-bold text-3xl mb-4 text-center">
+            {t("mission.creation.titles.summary")}
+          </h1>
+          <Image
+            src={require("@/assets/images/illustration/celebration.png")}
+            className="mx-auto"
+            width={400}
+            height={400}
+            alt="Mission summary"
+          />
+          <span className="text-neutral-500 font-bold my-2 text-center">
+            {t("mission.creation.helper.summary")}
+          </span>
+        </>
+      )}
       <div className="h-[1px]  border-b border-neutral-300 my-4" />
       <MissionSheetTitle mission={mission} />
       <MissionSheetCarousel mission={mission} />
