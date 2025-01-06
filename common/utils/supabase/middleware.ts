@@ -38,6 +38,11 @@ export async function updateSession(request: NextRequest) {
   const userRepo = new UserProfileRepository(supabase);
   const [userProfile] = user ? await userRepo.get(["user_id", "eq", user?.id]) : [null];
 
+  // Always allow
+  if (request.nextUrl.pathname.startsWith("/auth/reset-password")) {
+    return supabaseResponse;
+  }
+
   // Incomplete profile: Redirect to profile completion
   if (user && !userProfile && !request.nextUrl.pathname.startsWith("/onboarding/profiling")) {
     console.log(">>> Incomplete profile: Redirect to profile completion");
