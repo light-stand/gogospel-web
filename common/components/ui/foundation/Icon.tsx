@@ -73,6 +73,7 @@ import {
   mdiUndo,
   mdiDotsVertical,
   mdiSend,
+  mdiFaceWoman,
 } from "@mdi/js";
 
 export const icons = {
@@ -149,6 +150,7 @@ export const icons = {
   undo: mdiUndo,
   "dots-vertical": mdiDotsVertical,
   send: mdiSend,
+  "face-woman": mdiFaceWoman,
 };
 
 export type MaterialIconType = keyof typeof icons | null;
