@@ -15,16 +15,18 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
+          cookiesToSet.forEach(({ name, value, options }) =>
+            request.cookies.set(name, value),
+          );
           supabaseResponse = NextResponse.next({
             request,
           });
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            supabaseResponse.cookies.set(name, value, options),
           );
         },
       },
-    }
+    },
   );
 
   // IMPORTANT: Avoid writing any logic between createServerClient and
@@ -35,8 +37,10 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const userRepo = new UserProfileRepository(supabase);
-  const [userProfile] = user ? await userRepo.get(["user_id", "eq", user?.id]) : [null];
+  // const userRepo = new UserProfileRepository(supabase);
+  // const [userProfile] = user
+  //   ? await userRepo.get(["user_id", "eq", user?.id])
+  //   : [null];
 
   // Always allow
   if (request.nextUrl.pathname.startsWith("/auth/reset-password")) {
@@ -44,12 +48,16 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Incomplete profile: Redirect to profile completion
-  if (user && !userProfile && !request.nextUrl.pathname.startsWith("/onboarding/profiling")) {
-    console.log(">>> Incomplete profile: Redirect to profile completion");
-    const url = request.nextUrl.clone();
-    url.pathname = "/onboarding/profiling";
-    return NextResponse.redirect(url);
-  }
+  // if (
+  //   user &&
+  //   !userProfile &&
+  //   !request.nextUrl.pathname.startsWith("/onboarding/profiling")
+  // ) {
+  //   console.log(">>> Incomplete profile: Redirect to profile completion");
+  //   const url = request.nextUrl.clone();
+  //   url.pathname = "/onboarding/profiling";
+  //   return NextResponse.redirect(url);
+  // }
 
   // User exists, don't let it log again
   if (user && request.nextUrl.pathname.startsWith("/auth")) {
@@ -61,13 +69,13 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  console.log(user, request.nextUrl.pathname);
+
   // Anonymous user trying to access private screens
   if (
     !user &&
-    !request.nextUrl.pathname.startsWith("/") &&
-    !request.nextUrl.pathname.startsWith("/auth") &&
-    !request.nextUrl.pathname.startsWith("/explore") &&
-    !request.nextUrl.pathname.startsWith("/mission")
+    (request.nextUrl.pathname.startsWith("/mission") ||
+      request.nextUrl.pathname.startsWith("/my-profile"))
   ) {
     // no user, potentially respond by redirecting the user to the login page
     console.log(">>> Anonymous user trying to access private screens");

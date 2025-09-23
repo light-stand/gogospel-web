@@ -26,7 +26,7 @@ export const MissionSheetActions = ({ mission }: MissionSheetActionsProps) => {
 
   const isFavorite = useMemo(
     () => mission && checkIsFavorite(mission, user?.id),
-    [mission, user?.id]
+    [mission, user?.id],
   );
 
   const toggleFavorite = () => {
@@ -43,7 +43,7 @@ export const MissionSheetActions = ({ mission }: MissionSheetActionsProps) => {
 
   return (
     <div className="flex w-full gap-y-2 flex-col">
-      <div className="flex flex-row gap-x-2 flex-wrap w-full">
+      {/*<div className="flex flex-row gap-x-2 flex-wrap w-full">
         <Button
           className={clsx(
             "flex-1 border border-rose-500 py-2",
@@ -63,7 +63,7 @@ export const MissionSheetActions = ({ mission }: MissionSheetActionsProps) => {
           <Icon name="currency-usd" size={0.8} />
           {t("mission.actions.give")}
         </Button>
-      </div>
+      </div>*/}
       <Button onClick={onJoin} className="flex-1 py-3">
         <Icon name="handshake" size={0.8} />
         {t("mission.actions.join")}

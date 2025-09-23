@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import { indigo, neutral, white } from "tailwindcss/colors";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
   darkMode: ["class"],
@@ -11,6 +12,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-nunito)", ...fontFamily.sans],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

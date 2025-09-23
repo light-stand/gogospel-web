@@ -27,7 +27,9 @@ export default function Error({
         {t("alerts.somethingWentWrong.title")}
       </h1>
       <h2 className="text-center">{t("alerts.somethingWentWrong.text")}</h2>
-      <Button onClick={() => reset()}>{t("alerts.somethingWentWrong.button")}</Button>
+      <Button onClick={() => reset()}>
+        {t("alerts.somethingWentWrong.button")}
+      </Button>
     </main>
   );
 }

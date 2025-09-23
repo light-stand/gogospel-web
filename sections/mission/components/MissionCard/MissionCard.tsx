@@ -22,50 +22,58 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
 
   if (!mission.id) return null;
 
-  const { title, categories, duration, images, user_profile, approved } = mission;
+  const {
+    title,
+    categories,
+    duration,
+    images,
+    user_profile,
+    approved,
+    distance,
+  } = mission;
 
   return (
     <div
       className={clsx(
-        "relative h-[16rem] min-w-[220px]",
-        "flex flex-col justify-between gap-x-2",
-        "bg-white shadow-md rounded-lg overflow-hidden",
-        className
+        "relative",
+        "flex items-center justify-between gap-x-2",
+        "bg-white shadow-md overflow-hidden",
+        "rounded-xl",
+        "border border-gray-200",
+        "p-2",
+        className,
       )}
     >
-      <div className="rounded-2xl h-[8rem]">
-        <Image
-          src={(images && images[0] ? images[0] : user_profile?.images[0]) || ""}
-          className="flex-1 object-cover w-full h-full"
-          alt="Mission"
-          height={200}
-          width={200}
-        />
-      </div>
-      <div className="p-2 h-[8rem] flex flex-col justify-end z-10 w-full bg-white">
-        <span className="text-lg font-bold line-clamp-1">{title}</span>
-        <div className="flex flex-col w-full">
-          <div className="flex flex-row items-center">
-            <Icon name="church" className="mr-2 text-neutral-500 text-base" size={0.6} />
-            <span className="text-neutral-500 font-bold w-full line-clamp-1 text-sm">
-              {user_profile?.name}
-            </span>
+      <Image
+        src={(images && images[0] ? images[0] : user_profile?.images[0]) || ""}
+        className="flex-1 object-cover aspect-square rounded-md h-[122px] w-[122px]"
+        alt="Mission"
+        height={122}
+        width={122}
+      />
+      <span className="p-4 flex flex-col z-10 w-full bg-white">
+        {/*<span className="text-sm text-neutral-500 font-bold line-clamp-1">
+          {t("mission.explore.imLookingFor")}
+        </span>*/}
+        <span className="text-2xl font-bold line-clamp-1">{title}</span>
+        <span className="w-full flex text-neutral-500 flex-col gap-x-1">
+          <div className="flex flex-row items-center gap-x-1 text-nowrap">
+            <Icon name="account" size={0.8} />
+            {user_profile?.name}
           </div>
 
-          <div className="flex flex-row items-center gap-x-1">
-            {duration && (
+          <div className="flex flex-row items-center gap-x-1 text-nowrap">
+            {/*{duration && (
               <>
-                <Icon name="clock" className="text-neutral-500 text-base" size={0.6} />
-                <span className="text-sm text-neutral-500 font-bold line-clamp-1">
+                <Icon name="clock" className="text-neutral-500" size={0.6} />
+                <span className="text-sm text-neutral-500 line-clamp-1">
                   {capitalize(dayjs.duration(duration, "days").humanize())}
                 </span>
               </>
-            )}
-            <Icon name="map-marker" className="text-neutral-500 text-base" size={0.6} />
-            <span className="text-sm text-neutral-500 font-bold">
-              {/* {t("maps.distance", { distance })} */}
-              0km
-            </span>
+            )}*/}
+            <Icon name="map-marker" size={0.8} />
+            {/*{t("maps.distance", { distance })}*/}
+            {mission.location_name}
           </div>
           {/* {start_date && end_date && (
                 <div className="flex flex-row items-center">
@@ -75,8 +83,8 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
                   </span>
                 </div>
               )} */}
-        </div>
-        <TagCloud
+        </span>
+        {/*<TagCloud
           compact
           allSelected
           // noWrap
@@ -87,7 +95,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
             color: missionTypes[category].color,
             icon: missionTypes[category].icon,
           }))}
-        />
+        />*/}
         {/* <div className="flex flex-row items-center">
               <Icon name="calendar-month" className="mr-2 text-neutral-500 text-base" />
               <span className="text-md text-neutral-500 font-bold">
@@ -100,7 +108,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
                 className="absolute right-0 top-1/2 -mt-4 text-3xl text-neutral-400"
               />
             )} */}
-      </div>
+      </span>
     </div>
   );
 };

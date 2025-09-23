@@ -6,9 +6,12 @@ import { useSearchParams } from "next/navigation";
 import { LoginForm } from "@/auth/components/LoginForm";
 import { Icon } from "@/components/ui";
 
-const GoogleLoginButton = dynamic(() => import("@/auth/components/GoogleLoginButton"), {
-  ssr: false,
-});
+const GoogleLoginButton = dynamic(
+  () => import("@/auth/components/GoogleLoginButton"),
+  {
+    ssr: false,
+  },
+);
 
 export default function LoginPage() {
   const t = useTranslations();
@@ -18,6 +21,7 @@ export default function LoginPage() {
   return (
     <main className="max-w-[28rem] mx-auto h-full mt-8 w-full p-4 flex flex-col gap-y-4">
       <h1 className="font-bold text-3xl w-full">{t("auth.titles.login")}</h1>
+      <p className="">{t("auth.messages.helper")}</p>
       {passwordReset && (
         <div className="bg-green-200 border border-green-400 text-green-700 p-4 rounded-md">
           <Icon name="check" className="h-5 w-5 inline-block mr-2" />

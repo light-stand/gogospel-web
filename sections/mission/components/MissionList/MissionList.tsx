@@ -21,9 +21,9 @@ const MissionList: React.FC<MissionListProps> = ({
   return (
     <div
       className={clsx(
-        missions.length > 0 && "grid-cols-[repeat(auto-fill,minmax(220px,2fr))] gap-4",
-        "px-2 justify-center items-center",
-        className
+        missions.length > 0 && "gap-4",
+        "flex flex-col justify-center items-center",
+        className,
       )}
     >
       {missions.length === 0 && NoResultsComponent ? (
@@ -31,8 +31,8 @@ const MissionList: React.FC<MissionListProps> = ({
       ) : (
         missions.map((mission) => (
           <Link
-            href={`/mission/${mission.id}`}
-            className="hover:opacity-80 w-full"
+            href={`/${mission.id}`}
+            className="hover:opacity-80 hover:shadow-md transition w-full"
             key={mission.id}
           >
             <MissionCard mission={mission} />

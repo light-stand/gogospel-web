@@ -11,6 +11,7 @@ import {
   DurationSection,
   LocationSection,
   ImageSection,
+  ContactSection,
 } from "./partials";
 import explore from "@/assets/images/illustration/explore.png";
 import { Button } from "@/components/ui/button";
@@ -34,14 +35,15 @@ export const MissionForm = ({ form, onSubmit, variant }: MissionFormProps) => {
     e.stopPropagation();
     const formValid = await trigger();
     if (!formValid) return;
-    summaryOpen ? onSubmit() : setSummaryOpen(true);
+    onSubmit();
+    // summaryOpen ? onSubmit() : setSummaryOpen(true);
   };
 
   return (
     <>
       <Form {...form}>
-        <form className="max-w-screen-md mx-auto pb-12">
-          {!summaryOpen && (
+        <form className="max-w-screen-sm mx-auto pb-12 w-full">
+          {/*{!summaryOpen && (
             <Image
               className="mx-auto"
               src={explore}
@@ -49,13 +51,14 @@ export const MissionForm = ({ form, onSubmit, variant }: MissionFormProps) => {
               width={400}
               height={400}
             />
-          )}
+          )}*/}
           <div className="flex flex-col gap-4 gap-y-8">
             {!summaryOpen && (
               <>
                 <DetailsSection form={form} />
-                <DurationSection form={form} />
-                <CategorySection form={form} />
+                {/*<DurationSection form={form} />*/}
+                {/*<CategorySection form={form} />*/}
+                <ContactSection form={form} />
                 <LocationSection form={form} />
                 <ImageSection form={form} />
               </>

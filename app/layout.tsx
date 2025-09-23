@@ -4,10 +4,10 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
 import Providers from "@/common/context/providers";
-import { AppSidebar } from "@/common/components/navigation/AppSidebar";
+import { AppHeader } from "@/common/components/navigation/AppHeader";
 import "./globals.css";
 
-const nunito = Nunito({ subsets: ["latin"] });
+const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito" });
 
 export const metadata: Metadata = {
   title: "Go&Gospel",
@@ -23,14 +23,12 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="overflow-hidden">
-      <body className={`${nunito.className} antialiased`}>
+    <html lang={locale}>
+      <body className={`${nunito.variable} font-sans antialiased bg-gray-100 `}>
         <NextIntlClientProvider messages={messages}>
           <Providers>
-            <div className="h-screen w-screen flex flex-col-reverse md:flex-row flex-1 bg-neutral-100">
-              <AppSidebar />
-              <main className="w-full relative md:h-screen flex-1 overflow-y-auto">{children}</main>
-            </div>
+            <AppHeader />
+            <main className="w-full relative flex-1 h-full">{children}</main>
           </Providers>
         </NextIntlClientProvider>
       </body>
