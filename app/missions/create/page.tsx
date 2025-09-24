@@ -1,5 +1,4 @@
 "use client";
-import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import { MissionForm } from "@/mission/components/MissionForm/MissionForm";
@@ -7,10 +6,9 @@ import { useMissionCreation } from "@/mission/application/useMissionCreation";
 
 export default function MissionCreation() {
   const router = useRouter();
-  const t = useTranslations("mission.creation.titles");
   const { form, onSubmit } = useMissionCreation({
     onSuccess: () => {
-      router.replace("/missions/my-missions");
+      router.replace("/");
       router.refresh();
     },
   });

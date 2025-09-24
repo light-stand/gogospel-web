@@ -76,6 +76,7 @@ import {
   mdiFaceWoman,
   mdiPhone,
   mdiEmail,
+  mdiDelete,
 } from "@mdi/js";
 
 export const icons = {
@@ -155,6 +156,7 @@ export const icons = {
   "face-woman": mdiFaceWoman,
   email: mdiEmail,
   phone: mdiPhone,
+  delete: mdiDelete,
 };
 
 export type MaterialIconType = keyof typeof icons | null;

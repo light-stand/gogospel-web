@@ -69,8 +69,6 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  console.log(user, request.nextUrl.pathname);
-
   // Anonymous user trying to access private screens
   if (
     !user &&
@@ -78,7 +76,6 @@ export async function updateSession(request: NextRequest) {
       request.nextUrl.pathname.startsWith("/my-profile"))
   ) {
     // no user, potentially respond by redirecting the user to the login page
-    console.log(">>> Anonymous user trying to access private screens");
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
     return NextResponse.redirect(url);
