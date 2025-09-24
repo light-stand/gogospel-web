@@ -3,10 +3,8 @@ import Link from "next/link";
 import { Icon } from "@/components/ui";
 import { Button } from "@/components/ui/button";
 import { MissionSheetTitle } from "@/mission/components/MissionSheet/partials/MissionSheetTitle";
-import { MissionSheetCarousel } from "@/mission/components/MissionSheet/partials/MissionSheetCarousel";
 import { MissionSheetInfo } from "@/mission/components/MissionSheet/partials/MissionSheetInfo";
 import { MissionSheetContact } from "@/mission/components/MissionSheet/partials/MissionSheetContact";
-import { MissionSheetActions } from "@/mission/components/MissionSheet/partials/MissionSheetActions";
 import { createSSRClient } from "@/interface/apiSSR";
 
 export default async function MissionPage({

@@ -22,15 +22,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, className }) => {
 
   if (!mission.id) return null;
 
-  const {
-    title,
-    categories,
-    duration,
-    images,
-    user_profile,
-    approved,
-    distance,
-  } = mission;
+  const { title, images, user_profile } = mission;
 
   return (
     <div
